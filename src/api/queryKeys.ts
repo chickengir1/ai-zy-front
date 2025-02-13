@@ -1,8 +1,9 @@
 export const QUERY_KEYS = {
-  // 유저 쿼리 키 예시
   user: {
     base: ["user"] as const,
-    detail: (params: string) =>
-      [...QUERY_KEYS.user.base, "detail", params] as const,
+    detail: (id: number) =>
+      [...QUERY_KEYS.user.base, "detail", String(id)] as const,
+    list: (params?: Record<string, unknown>) =>
+      [...QUERY_KEYS.user.base, "list", params] as const,
   },
-};
+} as const;

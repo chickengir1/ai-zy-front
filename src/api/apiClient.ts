@@ -1,9 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import {
-  setupInterceptors,
-  requestInterceptor,
-  responseInterceptor,
-} from "./interceptors";
+import { setupInterceptors } from "./interceptors";
 
 export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   url: string;
@@ -11,51 +7,51 @@ export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   params?: Record<string, string>;
 }
 
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  statusText: string;
+  meta?: {
+    page?: number;
+    limit?: number;
+    total?: number;
+  };
+}
+
 export const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "",
-  headers: { "Content-Type": "application/json" },
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  timeout: 5000,
 });
 
 setupInterceptors(axiosInstance);
-axiosInstance.interceptors.request.use(requestInterceptor);
-axiosInstance.interceptors.response.use(responseInterceptor);
 
 export const apiClient = {
   get: <T>(config: RequestConfig) =>
-    axiosInstance.get<T>(config.url, config).then((res) => res.data),
+    axiosInstance
+      .get<ApiResponse<T>>(config.url, config)
+      .then((res) => res.data),
 
   post: <T>(config: RequestConfig) =>
     axiosInstance
-      .post<T>(config.url, config.data, config)
+      .post<ApiResponse<T>>(config.url, config.data, config)
       .then((res) => res.data),
 
   put: <T>(config: RequestConfig) =>
     axiosInstance
-      .put<T>(config.url, config.data, config)
+      .put<ApiResponse<T>>(config.url, config.data, config)
       .then((res) => res.data),
 
   patch: <T>(config: RequestConfig) =>
     axiosInstance
-      .patch<T>(config.url, config.data, config)
+      .patch<ApiResponse<T>>(config.url, config.data, config)
       .then((res) => res.data),
 
   delete: <T>(config: RequestConfig) =>
-    axiosInstance.delete<T>(config.url, config).then((res) => res.data),
+    axiosInstance
+      .delete<ApiResponse<T>>(config.url, config)
+      .then((res) => res.data),
 } as const;
-
-// 사용 예시
-// const getConfig: RequestConfig = {
-//   url: "/users",
-//   params: {
-//     page: 1,
-//     limit: 10,
-//   },
-// };
-
-// const postConfig: RequestConfig = {
-//     url: '/users',
-//     data: {
-//       name: 'users',
-//       email: 'users@example.com',
-//     },
-//   };

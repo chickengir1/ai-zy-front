@@ -26,6 +26,7 @@ export function responseInterceptor(response: AxiosResponse) {
   return response;
 }
 
+// TODO : 토큰 만료 시 갱신 로직 작성
 export function responseErrorInterceptor(error: AxiosError) {
   return Promise.reject(error);
 }
