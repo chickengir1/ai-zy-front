@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { IoPushOutline } from "react-icons/io5";
 import { twMerge } from "tailwind-merge";
-import { baseClasses, sizeClasses } from "../../utils/Styles/globalStyeld";
+import { baseClasses, sizeClasses } from "@/utils/styles/globalStyeld";
 
 interface CreationFormProps {
   path?: string;

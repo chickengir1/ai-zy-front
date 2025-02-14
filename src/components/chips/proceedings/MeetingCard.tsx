@@ -4,10 +4,9 @@ import ParticipantIcons from "../projects/ParticipantIcons";
 import { twMerge } from "tailwind-merge";
 import {
   baseClasses,
-  sizeClasses,
   sharedCardStyles,
-} from "@/utils/Styles/globalStyeld";
-
+  sizeClasses,
+} from "@/utils/styles/globalStyeld";
 interface MeetingCardProps {
   participantCount: number;
   name: string;
