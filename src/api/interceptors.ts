@@ -4,29 +4,48 @@ import {
   InternalAxiosRequestConfig,
   AxiosResponse,
 } from "axios";
+import { determineErrorType, handleAuthIfNeeded } from "./errorHandler";
 
-// TODO : 나중에 구체적으로바꿔야댐
 export function setupInterceptors(instance: AxiosInstance) {
-  instance.interceptors.request.use((config) => config);
+  instance.interceptors.request.use(
+    requestInterceptor,
+    requestErrorInterceptor
+  );
+  instance.interceptors.response.use(
+    responseInterceptor,
+    responseErrorInterceptor
+  );
 }
 
 export function requestInterceptor(
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig {
+  // TODO: 요청 전 공통 처리
+  // 토큰 추가 예상 코드
+  // const token = getToken();
+  // if (token) {
+  //   config.headers = config.headers || {};
+  //   config.headers["Authorization"] = `Bearer ${token}`;
+  // }
   return config;
 }
 
 export function requestErrorInterceptor(
   error: AxiosError
 ): Promise<AxiosError> {
-  return Promise.reject(error);
+  const apiError = determineErrorType(error);
+  handleAuthIfNeeded(apiError);
+  return Promise.reject(apiError);
 }
 
 export function responseInterceptor(response: AxiosResponse) {
-  return response;
+  const { data } = response;
+  console.log("데이터 반환 값", data);
+  return data;
 }
 
-// TODO : 토큰 만료 시 갱신 로직 작성
 export function responseErrorInterceptor(error: AxiosError) {
-  return Promise.reject(error);
+  const apiError = determineErrorType(error);
+  handleAuthIfNeeded(apiError);
+  return Promise.reject(apiError);
 }
