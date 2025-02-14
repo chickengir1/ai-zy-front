@@ -3,12 +3,10 @@ import ProjectCard from "@/components/chips/projects/ProjectCard";
 import CreationItem from "@/components/chips/CreationItem";
 import MeetingCard from "@/components/chips/proceedings/MeetingCard";
 
-const titleProps = "루트페이지";
-
 export default function HomePage() {
   return (
     <div>
-      <Header title={titleProps} />
+      <Header title="Ai-Zy 루트페이지" />
       <div className="m-4 flex flex-col flex-wrap gap-4 md:flex-row">
         <ProjectCard
           participantCount={10}
