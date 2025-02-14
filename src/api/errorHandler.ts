@@ -50,9 +50,9 @@ function handleAuthError(error: ApiError) {
 
 function handleAxiosError(error: AxiosError<ErrorResponse>): ApiError {
   return {
-    code: error.response?.data?.code ?? "UNKNOWN_ERROR",
-    message: error.response?.data?.message ?? error.message,
-    status: error.response?.status ?? 500,
+    code: error.response?.data?.code || "UNKNOWN_ERROR",
+    message: error.response?.data?.message || error.message,
+    status: error.response?.status || 500,
   };
 }
 
