@@ -2,11 +2,23 @@ import Header from "@/components/layout/Header";
 import ProjectCard from "@/components/chips/projects/ProjectCard";
 import CreationItem from "@/components/chips/CreationItem";
 import MeetingCard from "@/components/chips/proceedings/MeetingCard";
+import Modal from "@/components/portal/modal/Modal";
+import { useState } from "react";
 
 export default function HomePage() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
       <Header title="Ai-Zy 루트페이지" />
+      <button
+        className="m-4 rounded-md bg-gray-500 p-2 text-white"
+        onClick={() => setIsOpen(true)}
+      >
+        모달 열기 테스트 버튼
+      </button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <div>이건 모달입니다.</div>
+      </Modal>
       <div className="m-4 flex flex-col flex-wrap gap-4 md:flex-row">
         <ProjectCard
           participantCount={10}
