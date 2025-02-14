@@ -44,7 +44,6 @@ function createOnErrorFn() {
 const defaultQueryOptions = {
   queryFn: createQueryFn<unknown>(),
   retry: createRetryFn(),
-  staleTime: 1000 * 60 * 2,
   gcTime: 1000 * 60 * 5,
   refetchOnWindowFocus: false,
   throwOnError: true,
