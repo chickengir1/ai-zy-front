@@ -21,7 +21,7 @@ export default function MeetingCard({
   name,
   description,
   createdAt,
-  linkTo = "/",
+  linkTo = "/projects/1/proceedings/1",
   tag,
 }: MeetingCardProps) {
   return (
