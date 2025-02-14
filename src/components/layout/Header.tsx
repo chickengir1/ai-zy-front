@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export default function Header({ title, className }: HeaderProps) {
   const { pathname } = useLocation();
-  const match = useMatch("/projects/:id/docs/:Id");
+  const match = useMatch("/projects/:id/proceedings/:id");
 
   const headerResponsive = "sm:px-3 sm:py-6 lg:px-4 lg:py-8";
   const headerClasses = twMerge("text-lg sm:text-xl lg:text-2xl", className);
