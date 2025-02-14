@@ -1,6 +1,10 @@
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
-import { baseClasses, sizeClasses } from "@/utils/Styles/globalStyeld";
+import {
+  baseClasses,
+  sizeClasses,
+  sharedCardStyles,
+} from "@/utils/Styles/globalStyeld";
 import ParticipantIcons from "./ParticipantIcons";
 
 interface ProjectCardProps {
@@ -10,7 +14,7 @@ interface ProjectCardProps {
   tag: string;
   gradientFrom?: string;
   gradientTo?: string;
-  linkTo?: string;
+  linkTo: string;
 }
 
 export default function ProjectCard({
@@ -33,18 +37,16 @@ export default function ProjectCard({
           gradientTo
         )}
       >
-        <span className="m-2 w-fit rounded bg-black px-2 py-1 text-sm text-white">
-          {tag}
-        </span>
+        <span className={sharedCardStyles.tag}>{tag}</span>
         <div className="flex flex-col gap-1 rounded-b-2xl border bg-[#f9f9f9] p-4">
-          <h2 className="truncate text-lg font-bold text-gray-700">{name}</h2>
-          <p className="truncate text-sm text-gray-500">{description}</p>
-          <div className="flex items-center justify-between">
+          <h2 className={sharedCardStyles.title}>{name}</h2>
+          <p className={sharedCardStyles.description}>{description}</p>
+          <footer className={sharedCardStyles.footer}>
             <ParticipantIcons count={participantCount} />
-            <span className="text-sm text-gray-800">
+            <span className={sharedCardStyles.participantText}>
               {participantCount}명의 참가자
             </span>
-          </div>
+          </footer>
         </div>
       </div>
     </Link>

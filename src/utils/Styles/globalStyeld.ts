@@ -9,9 +9,17 @@ export const baseClasses = {
 };
 
 export const sizeClasses = {
-  container: "h-[250px] w-full max-w-[350px] md:h-[300px] ",
+  container: "min-h-[250px] min-w-[325px] max-w-[350px] md:h-[300px]",
   linkButton: "gap-4 md:gap-3",
   iconContainer: "h-12 w-12 md:h-10 md:w-10",
   icon: "h-6 w-6 md:h-5 md:w-5",
   text: "text-base md:text-lg",
+};
+
+export const sharedCardStyles = {
+  tag: "m-2 w-fit rounded-full bg-black px-2 py-1 text-sm text-white",
+  title: "truncate font-bold text-gray-700",
+  description: "truncate text-sm text-gray-500",
+  footer: "flex items-center justify-between",
+  participantText: "text-sm text-gray-800",
 };
