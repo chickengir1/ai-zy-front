@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import Header from "@/components/layout/Header";
 
 export default function DocsPage() {
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold">DocsPage</h1>
+    <div>
+      <Header title="프로젝트 문서 페이지" />
       <Link to="/projects">Projects</Link>
     </div>
   );

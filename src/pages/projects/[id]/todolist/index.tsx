@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import Header from "@/components/layout/Header";
 
 export default function TodolistPage() {
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold">TodolistPage</h1>
+    <div>
+      <Header title="투두리스트 페이지" />
       <Link to="/projects">Projects</Link>
     </div>
   );

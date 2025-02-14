@@ -4,9 +4,11 @@ import RouteConfig from "vite-plugin-pages-router";
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouteConfig />
-    </QueryClientProvider>
+    <div className="h-screen bg-[#F7F9FC]">
+      <QueryClientProvider client={queryClient}>
+        <RouteConfig />
+      </QueryClientProvider>
+    </div>
   );
 }
 
