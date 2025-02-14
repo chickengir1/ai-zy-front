@@ -3,10 +3,9 @@ import Header from "@/components/layout/Header";
 import { MemoryRouter } from "react-router-dom";
 
 const meta: Meta<typeof Header> = {
-  title: "Common/Header",
+  title: "Layout/Header",
   component: Header,
   tags: ["autodocs"],
-  argTypes: {},
   decorators: [
     (Story) => (
       <MemoryRouter>
