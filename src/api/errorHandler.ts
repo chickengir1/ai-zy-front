@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+
+// TODO: 로그아웃 처리 해야함
 
 export interface ApiError {
   code: string;
@@ -6,39 +8,59 @@ export interface ApiError {
   status: number;
 }
 
-type NonEmptyResponse = Exclude<unknown, null | undefined>;
+interface ErrorResponse extends AxiosError {
+  code: string;
+  message: string;
+}
 
-// overload 1
-export function handleApiCall<T extends NonEmptyResponse>(
-  apiCall: Promise<T>
-): Promise<T>;
+export function apiRequest<T>(
+  url: string,
+  config?: AxiosRequestConfig
+): Promise<T | ApiError> {
+  return axios({ url, ...config })
+    .then((response) => response.data as T)
+    .catch((error) => {
+      const apiError = determineErrorType(error);
+      handleAuthIfNeeded(apiError);
+      return apiError;
+    });
+}
 
-// overload 2
-export function handleApiCall<T extends NonEmptyResponse, E>(
-  apiCall: Promise<T>,
-  onError: (error: ApiError) => E
-): Promise<T | E>;
+export function determineErrorType(error: unknown): ApiError {
+  if (axios.isAxiosError(error)) {
+    return handleAxiosError(error);
+  }
+  return handleUnknownError(error);
+}
 
-export function handleApiCall<T extends NonEmptyResponse, E>(
-  apiCall: Promise<T>,
-  onError?: (error: ApiError) => E
-): Promise<T | E> {
-  return apiCall.catch((error: unknown) => {
-    if (!axios.isAxiosError(error)) {
-      throw error;
-    }
+export function handleAuthIfNeeded(apiError: ApiError): void {
+  if (apiError.status === 401 || apiError.status === 403) {
+    handleAuthError(apiError);
+  }
+}
 
-    const apiError: ApiError = {
-      code: error.response?.data?.code || "알 수 없는 에러 발생",
-      message: error.response?.data?.message || error.message,
-      status: error.response?.status || 500,
-    };
+function handleAuthError(error: ApiError) {
+  if (error.status === 401) {
+    console.error("인증이 만료되었습니다. 다시 로그인해주세요.");
+    // authStore.getState().logout();
+  } else if (error.status === 403) {
+    console.error("접근 권한이 없습니다.");
+  }
+}
 
-    if (error.response?.status === 401) {
-      // TODO : 인증 에러 처리
-      // authStore.getState().logout();
-    }
+function handleAxiosError(error: AxiosError<ErrorResponse>): ApiError {
+  return {
+    code: error.response?.data?.code ?? "UNKNOWN_ERROR",
+    message: error.response?.data?.message ?? error.message,
+    status: error.response?.status ?? 500,
+  };
+}
 
-    return onError ? onError(apiError) : Promise.reject(apiError);
-  });
+function handleUnknownError(error: unknown): ApiError {
+  console.error("알 수 없는 오류", error);
+  return {
+    code: "UNKNOWN_ERROR",
+    message: "알 수 없는 오류가 발생했습니다.",
+    status: 500,
+  };
 }

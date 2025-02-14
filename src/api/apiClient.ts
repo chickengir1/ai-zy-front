@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { setupInterceptors } from "./interceptors";
+import { ApiError } from "./errorHandler";
 
 export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   url: string;
@@ -7,7 +8,7 @@ export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   params?: Record<string, string>;
 }
 
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
   data: T;
   status: number;
   statusText: string;
@@ -19,7 +20,7 @@ interface ApiResponse<T> {
 }
 
 export const axiosInstance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -33,25 +34,40 @@ export const apiClient = {
   get: <T>(config: RequestConfig) =>
     axiosInstance
       .get<ApiResponse<T>>(config.url, config)
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   post: <T>(config: RequestConfig) =>
     axiosInstance
       .post<ApiResponse<T>>(config.url, config.data, config)
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   put: <T>(config: RequestConfig) =>
     axiosInstance
       .put<ApiResponse<T>>(config.url, config.data, config)
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   patch: <T>(config: RequestConfig) =>
     axiosInstance
       .patch<ApiResponse<T>>(config.url, config.data, config)
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   delete: <T>(config: RequestConfig) =>
     axiosInstance
       .delete<ApiResponse<T>>(config.url, config)
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 } as const;
