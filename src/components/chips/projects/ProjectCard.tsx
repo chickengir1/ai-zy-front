@@ -1,11 +1,12 @@
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
+
+import ParticipantIcons from "./ParticipantIcons";
 import {
   baseClasses,
-  sizeClasses,
   sharedCardStyles,
-} from "@/utils/Styles/globalStyeld";
-import ParticipantIcons from "./ParticipantIcons";
+  sizeClasses,
+} from "@/utils/styles/globalStyeld";
 
 interface ProjectCardProps {
   participantCount: number;

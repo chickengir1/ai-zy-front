@@ -3,7 +3,7 @@ import CreationItem from "@/components/chips/CreationItem";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof CreationItem> = {
-  title: "Chips/CreationItem",
+  title: "chips/CreationItem",
   component: CreationItem,
   args: {
     path: "/",
