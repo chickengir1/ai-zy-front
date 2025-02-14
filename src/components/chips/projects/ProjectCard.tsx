@@ -37,8 +37,8 @@ export default function ProjectCard({
           {tag}
         </span>
         <div className="flex flex-col gap-1 rounded-b-2xl border bg-[#f9f9f9] p-4">
-          <h2 className="text-lg font-bold text-gray-700">{name}</h2>
-          <p className="text-sm text-gray-500">{description}</p>
+          <h2 className="truncate text-lg font-bold text-gray-700">{name}</h2>
+          <p className="truncate text-sm text-gray-500">{description}</p>
           <div className="flex items-center justify-between">
             <ParticipantIcons count={participantCount} />
             <span className="text-sm text-gray-800">
