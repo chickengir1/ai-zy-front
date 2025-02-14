@@ -35,7 +35,7 @@ export default function HomePage() {
           createdAt="2024-01-01"
           description="프로젝트 설명"
           tag="태그"
-          linkTo="/proceedings"
+          linkTo="/projects/1/proceedings/1"
         />
         <CreationItem path="/projects" />
       </div>
