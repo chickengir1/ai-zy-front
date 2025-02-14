@@ -1,15 +1,20 @@
-import { useLocation, useMatch } from "react-router-dom";
+import { HEADER_ROUTES } from "@/utils/helpers/headerRoute";
+import { useMatch } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
 interface HeaderProps {
-  title?: string;
+  title: string;
   className?: string;
 }
 
-export default function Header({ title, className }: HeaderProps) {
-  const { pathname } = useLocation();
-  const match = useMatch("/projects/:id/proceedings/:id");
+function shouldDisplayHeader(): boolean {
+  return HEADER_ROUTES.some((route) => {
+    const match = useMatch(route.path);
+    return match && route.shouldShowHeader;
+  });
+}
 
+export default function Header({ title, className }: HeaderProps) {
   const headerResponsive = "sm:px-3 sm:py-6 lg:px-4 lg:py-8";
   const headerClasses = twMerge("text-lg sm:text-xl lg:text-2xl", className);
 
@@ -17,10 +22,9 @@ export default function Header({ title, className }: HeaderProps) {
     <header
       className={`flex w-full items-center justify-between bg-white px-2 py-4 shadow-md ${headerResponsive}`}
     >
-      {pathname === "/" && <h1 className={headerClasses}>{title}</h1>}
-      {(pathname === "/projects" || pathname.startsWith("/projects/")) &&
-        !match && <h1 className={headerClasses}>{title}</h1>}
-      {match && <h1 className={headerClasses}>{title}</h1>}
+      {shouldDisplayHeader() && (
+        <h1 className={headerClasses}>{title}-헤더 프롭스 테스트 중</h1>
+      )}
     </header>
   );
 }
