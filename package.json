@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npm run build-storybook && npx chromatic --project-token=chpt_3a641548cdfc771 --auto-accept-changes"
+    "chromatic": "npx chromatic --project-token=chpt_3a641548cdfc771 --auto-accept-changes"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
