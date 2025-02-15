@@ -22,7 +22,7 @@ export default function ParticipantInDocs({
           className="flex items-center gap-1 rounded-full bg-gray-200 p-1"
         >
           <BsPersonCircle size={20} className="text-gray-500" />
-          <span className="pr-1 text-sm text-gray-500">
+          <span className="pr-1 text-xs text-gray-500 md:text-sm">
             {participantNames[index] || ""}
           </span>
         </div>

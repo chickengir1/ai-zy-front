@@ -12,9 +12,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "^5.66.0",
     "@tanstack/react-query-devtools": "^5.66.0",
-    "@uiw/react-md-editor": "^4.0.5",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "framer-motion": "^12.4.2",
@@ -22,7 +22,9 @@
     "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",
     "react-icons": "^5.4.0",
+    "react-markdown": "^9.0.3",
     "react-mentions": "^4.4.10",
+    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.0.1",
     "vite-plugin-pages-router": "^1.0.25",
     "zustand": "^5.0.3"
