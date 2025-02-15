@@ -5,9 +5,10 @@ import { baseClasses, sizeClasses } from "@/utils/styles/globalStyeld";
 
 interface CreationFormProps {
   path?: string;
+  onClick?: () => void;
 }
 
-export default function CreationItem({ path }: CreationFormProps) {
+export default function CreationItem({ path, onClick }: CreationFormProps) {
   return (
     <div
       className={twMerge(
@@ -38,6 +39,7 @@ export default function CreationItem({ path }: CreationFormProps) {
       ) : (
         <button
           className={twMerge(baseClasses.linkButton, sizeClasses.linkButton)}
+          onClick={onClick}
         >
           <div
             className={twMerge(

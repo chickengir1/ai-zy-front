@@ -22,9 +22,7 @@ export default function Header({ title, className }: HeaderProps) {
     <header
       className={`flex w-full items-center justify-between bg-white px-2 py-4 shadow-md ${headerResponsive}`}
     >
-      {shouldDisplayHeader() && (
-        <h1 className={headerClasses}>{title}-헤더 프롭스 테스트 중</h1>
-      )}
+      {shouldDisplayHeader() && <h1 className={headerClasses}>{title}</h1>}
     </header>
   );
 }
