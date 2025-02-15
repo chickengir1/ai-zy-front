@@ -1,11 +1,13 @@
 import { useResizeHandler } from "@/hooks/ui/useResizeHandler";
 import { MIN_WIDTH } from "@/utils/constants";
 import { FaExclamationTriangle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Unsupported = () => {
+  const navigate = useNavigate();
+
   useResizeHandler(MIN_WIDTH, () => {
-    window.history.replaceState(null, "", "/");
-    window.location.reload();
+    navigate(-1);
   });
 
   return (
