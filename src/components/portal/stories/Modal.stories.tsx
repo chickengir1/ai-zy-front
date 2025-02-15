@@ -9,6 +9,7 @@ const meta: Meta<typeof Modal> = {
   args: {
     isOpen: true,
     onClose: () => {},
+    title: "모달입니다",
   },
 };
 
@@ -22,7 +23,11 @@ export const Default: Story = {
 
     return (
       <div>
-        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          title="모달입니다"
+        >
           <div className="flex flex-col gap-4">
             <div>이건 모달입니다.</div>
             <span>여러가지 내용을 추가 할 수 있어요.</span>
