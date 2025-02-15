@@ -1,9 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import DocumentHeader from "@/components/chips/proceedings/document/DocumentHeader";
+import Document from "@/components/chips/proceedings/document/Document";
+import { content } from "@/utils/constants";
 
-const meta: Meta<typeof DocumentHeader> = {
-  title: "document/DocumentHeader",
-  component: DocumentHeader,
+const meta: Meta<typeof Document> = {
+  title: "document/Document",
+  component: Document,
   tags: ["autodocs"],
   args: {
     title: "프로젝트 A 킥오프 미팅",
@@ -13,6 +14,7 @@ const meta: Meta<typeof DocumentHeader> = {
     onClickSetting: () => {
       alert("설정 버튼 클릭");
     },
+    content: content,
   },
 };
 
@@ -20,4 +22,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    content: content,
+  },
+};
