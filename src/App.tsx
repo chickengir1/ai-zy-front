@@ -6,11 +6,9 @@ import useWidthChecker from "./hooks/ui/useWidthChecker";
 function App() {
   useWidthChecker();
   return (
-    <div className="bg-[#F7F9FC]">
-      <QueryClientProvider client={queryClient}>
-        <RouteConfig />
-      </QueryClientProvider>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <RouteConfig />
+    </QueryClientProvider>
   );
 }
 

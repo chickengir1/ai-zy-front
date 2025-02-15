@@ -8,3 +8,8 @@
   box-sizing: border-box;
 }
 
+@layer base {
+  body {
+    @apply bg-[#f7f9fc];
+  }
+}

@@ -30,7 +30,11 @@ export default function HomePage() {
       >
         모달 열기 테스트 버튼
       </button>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="프로젝트 멤버 관리"
+      >
         <div>이건 모달입니다.</div>
       </Modal>
       <div className="m-4 flex items-center justify-center">
