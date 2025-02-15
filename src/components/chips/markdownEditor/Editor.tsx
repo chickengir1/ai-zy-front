@@ -147,7 +147,7 @@ export default function MarkdownEditor() {
             계속 작성하기
           </button>
           <button
-            onClick={() => navigate("/projects")}
+            onClick={() => navigate(-1)}
             className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             취소
