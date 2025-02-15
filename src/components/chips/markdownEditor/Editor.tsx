@@ -14,6 +14,7 @@ interface Document {
 }
 
 // TODO : 월요일에 코드 분리할 것
+// TODO : 폼 제출 성공일때 proceedings 페이지로 이동
 // NOTE : 훅 2개, 제출 폼, 원래 문서 내용 가져오기는 훅
 
 export default function MarkdownEditor() {
