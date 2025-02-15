@@ -1,0 +1,5 @@
+chromatic:
+  image: node:16
+  script:
+    - npm install
+    - npx chromatic --project-token=chpt_3a641548cdfc771 --auto-accept-changes
