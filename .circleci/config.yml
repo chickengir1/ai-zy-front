@@ -1,0 +1,14 @@
+version: 2.1
+jobs:
+  chromatic:
+    docker:
+      - image: cimg/node:16
+    steps:
+      - checkout
+      - run: npm install
+      - run: npx chromatic --project-token=chpt_3a641548cdfc771 --auto-accept-changes
+workflows:
+  version: 2
+  chromatic:
+    jobs:
+      - chromatic
