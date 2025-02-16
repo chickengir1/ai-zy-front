@@ -2,11 +2,7 @@ import { FaRegCalendarCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ParticipantIcons from "../projects/ParticipantIcons";
 import { twMerge } from "tailwind-merge";
-import {
-  baseClasses,
-  sharedCardStyles,
-  sizeClasses,
-} from "@/utils/styles/globalStyeld";
+import { baseClasses, sharedCardStyles } from "@/utils/styles/globalStyeld";
 interface MeetingCardProps {
   participantCount: number;
   name: string;
@@ -29,28 +25,31 @@ export default function MeetingCard({
       <div
         className={twMerge(
           baseClasses.container,
-          sizeClasses.container,
-          "flex flex-col bg-white p-4"
+          "relative flex flex-col gap-4 bg-white p-4"
         )}
       >
-        <header className="flex justify-between">
-          <div className="flex items-center gap-4">
-            <span className="flex items-center justify-center rounded-full border bg-blue-100 p-3">
+        <header className="flex items-start justify-between">
+          <div className="flex flex-1 items-center gap-4">
+            <span className="flex shrink-0 items-center justify-center rounded-full border bg-blue-100 p-3">
               <FaRegCalendarCheck className="text-blue-500" size={20} />
             </span>
-            <div className="max-w-[125px] flex-1">
-              <h2 className={sharedCardStyles.title}>{name}</h2>
-              <p className={sharedCardStyles.description}>{createdAt}</p>
+            <div className="max-w-[130px]">
+              <h2 className={twMerge(sharedCardStyles.title)}>{name}</h2>
+              <p className={twMerge(sharedCardStyles.description)}>
+                {createdAt}
+              </p>
             </div>
           </div>
-          <span className={sharedCardStyles.tag}>{tag}</span>
+          <span
+            className={twMerge(sharedCardStyles.tag, "absolute right-0 top-0")}
+          >
+            {tag}
+          </span>
         </header>
-        <blockquote className="my-4 max-w-[325px] flex-1 rounded-r border-l-4 border-gray-300 bg-gray-200 p-2 text-sm">
-          <p className="line-clamp-[4] tracking-widest md:line-clamp-[7]">
-            {description}
-          </p>
+        <blockquote className="h-[100px] overflow-y-auto rounded-r border-l-4 border-gray-300 bg-gray-200 p-2 text-sm md:h-[160px]">
+          <p className="whitespace-pre-line break-words">{description}</p>
         </blockquote>
-        <footer className={sharedCardStyles.footer}>
+        <footer className={twMerge(sharedCardStyles.footer)}>
           <ParticipantIcons count={participantCount} />
           <span className={sharedCardStyles.participantText}>
             {participantCount}명의 참가자

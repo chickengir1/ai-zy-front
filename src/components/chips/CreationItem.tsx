@@ -13,8 +13,7 @@ export default function CreationItem({ path, onClick }: CreationFormProps) {
     <div
       className={twMerge(
         "flex flex-col items-center justify-center bg-white",
-        baseClasses.container,
-        sizeClasses.container
+        baseClasses.container
       )}
     >
       {path ? (
