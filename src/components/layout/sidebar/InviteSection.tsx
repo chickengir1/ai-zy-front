@@ -42,7 +42,6 @@ export default function InviteSection({
         <div className="flex flex-col">
           <div className={twMerge(SidebarClasses.listClasses, "flex")}>
             <input
-              id="inviteEmail"
               type="email"
               placeholder="프로젝트에 팀원을 초대하세요"
               className={twMerge(
