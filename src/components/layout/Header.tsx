@@ -1,4 +1,4 @@
-import { HEADER_ROUTES } from "@/utils/helpers/headerRoute";
+import { HEADER_ROUTES } from "@/utils/helpers/routeConfig";
 import { useMatch } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 

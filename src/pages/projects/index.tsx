@@ -11,12 +11,14 @@ export default function ProjectsPage() {
     <div>
       <Header title="Ai-Zy 루트페이지" />
       {/*검색창 공용 컴포넌트*/}
-      <div className="m-4 flex flex-col items-center justify-center gap-4 border-8">
-        <input type="text" />
-        <button>검색</button>
+      <div className="flex w-full items-center justify-center px-16 py-4">
+        <div className="flex items-center gap-2 border-2 border-black p-4">
+          <input type="text" />
+          <button>검색</button>
+        </div>
       </div>
       {/*twMerge 회의록 리스트 페이지랑 같은 스타일*/}
-      <div className="m-16 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-items-center gap-12">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-items-center gap-12 px-16 py-4">
         {Array.from({ length: fetchdataProjectCardLength }).map((_, index) => (
           <ProjectCard
             key={`project-id-${index}`}
