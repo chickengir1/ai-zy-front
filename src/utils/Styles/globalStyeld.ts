@@ -30,3 +30,11 @@ export const MainLayoutClasses = {
   headerPadding:
     "flex w-full flex-col items-center gap-4 px-20 pt-4 md:flex-row",
 };
+
+export const SidebarClasses = {
+  buttonClasses: "rounded-r w-[100px] px-4 py-2 text-sm text-white",
+  inputClasses: "w-full rounded-l border p-2 h-12 text-sm focus:outline-none ",
+  errorClasses: "mt-1 text-xs text-red-500",
+  listClasses: "rounded-md border shadow-sm",
+  titleClasses: "text-lg font-medium mb-2",
+};

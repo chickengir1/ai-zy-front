@@ -21,7 +21,7 @@ export default function ProjectPage() {
           )}
         >
           <ToggleNav />
-          <div className="flex items-center gap-2 border-2 border-black p-4">
+          <div className="flex items-center gap-2 border-2 border-black p-2">
             <input type="text" />
             <button>검색</button>
           </div>
