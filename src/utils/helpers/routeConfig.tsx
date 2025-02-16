@@ -25,6 +25,6 @@ export function getActiveTab(
   location: Location
 ): string {
   const segments = location.pathname.split("/");
-  const tabId = segments[segments.indexOf("projects") + 2];
-  return tabs.find((tab) => tab.id === tabId)?.id || "proceedings";
+  const tabId = segments[segments.indexOf("projects") + 2] || "";
+  return tabs.find((tab) => tab.id === tabId)?.id || "";
 }

@@ -1,4 +1,4 @@
-export const MIN_WIDTH = 350;
+export const MIN_WIDTH = 320;
 
 export const content = `
 ## 프로젝트 A 킥오프 미팅
