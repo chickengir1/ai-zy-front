@@ -19,7 +19,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
   render: function Render() {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
       <div>
