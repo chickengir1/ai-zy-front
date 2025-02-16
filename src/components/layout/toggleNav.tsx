@@ -1,6 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getActiveTab, tabs } from "@/utils/helpers/routeConfig";
 
+// NOTE : 해당 컴포넌트는 책임이 크지 않아서 따로 함수를 분리하지 않을 예정
 export default function ToggleNav() {
   const { id } = useParams();
   const location = useLocation();
