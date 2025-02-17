@@ -25,7 +25,7 @@ export const sharedCardStyles = {
 
 export const MainLayoutClasses = {
   container: "flex h-screen w-screen",
-  grid: "grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-items-center gap-6",
+  grid: "grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-items-center gap-6",
   padding: "px-4 py-4 sm:px-8 md:px-12 lg:px-16",
   headerNavPadding:
     "flex w-full flex-col items-center gap-4 px-20 pt-4 md:flex-row",

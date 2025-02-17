@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import Header from "@/components/layout/Header";
 import ToggleNav from "@/components/layout/toggleNav";
+import SearchInput from "@/components/ui/search/SearchInput";
 
 export default function TodolistPage() {
   return (
@@ -17,10 +18,13 @@ export default function TodolistPage() {
         )}
       >
         <ToggleNav />
-        <div className="flex items-center gap-2 border-2 border-black p-4">
-          <input type="text" />
-          <button>검색</button>
-        </div>
+        <SearchInput
+          placeholder="투두리스트를 검색해보세요"
+          onClick={() => {
+            alert("검색");
+          }}
+          onChange={() => {}}
+        />
       </div>
       <Link to="/">홈페이지로 이동</Link>
     </div>

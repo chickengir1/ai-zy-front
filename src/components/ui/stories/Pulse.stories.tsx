@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Pulse from "@/components/ui/loading/Pulse";
 
 const meta: Meta<typeof Pulse> = {
-  title: "Loading/Pulse",
+  title: "ui/Pulse",
   component: Pulse,
   tags: ["autodocs"],
   parameters: {
