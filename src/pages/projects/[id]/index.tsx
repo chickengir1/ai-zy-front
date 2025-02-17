@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { MainLayoutClasses } from "@/utils/styles/globalStyeld";
+import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import Header from "@/components/layout/Header";
 import MeetingCard from "@/components/chips/proceedings/MeetingCard";
@@ -12,11 +12,13 @@ export default function ProjectPage() {
 
   return (
     <>
-      <Header title="프로젝트 페이지" />
+      <div className={twMerge(UnitClasses.header)}>
+        <Header title="프로젝트 페이지" />
+      </div>
       <div>
         <div
           className={twMerge(
-            MainLayoutClasses.headerPadding,
+            MainLayoutClasses.headerNavPadding,
             "justify-between"
           )}
         >

@@ -6,6 +6,8 @@ import ProjectForm from "./ProjectForm";
 import TagSelect from "./TagSelect";
 import InviteSection from "./InviteSection";
 import Toastify from "@/components/ui/toast/Toastify";
+import { UnitClasses } from "@/utils/styles/globalStyeld";
+import { twMerge } from "tailwind-merge";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -125,10 +127,7 @@ export default function Sidebar({
                   setInviteEmail={setInviteEmail}
                   getInvitedMembers={getInvitedMembers}
                 />
-                <button
-                  type="submit"
-                  className="w-full rounded bg-indigo-600 px-4 py-3 text-white transition-colors hover:bg-indigo-700"
-                >
+                <button type="submit" className={twMerge(UnitClasses.button)}>
                   제출
                 </button>
               </div>

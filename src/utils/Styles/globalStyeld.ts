@@ -27,7 +27,7 @@ export const MainLayoutClasses = {
   container: "flex h-screen w-screen",
   grid: "grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-items-center gap-6",
   padding: "px-4 py-4 sm:px-8 md:px-12 lg:px-16",
-  headerPadding:
+  headerNavPadding:
     "flex w-full flex-col items-center gap-4 px-20 pt-4 md:flex-row",
 };
 
@@ -37,4 +37,16 @@ export const SidebarClasses = {
   errorClasses: "mt-1 text-xs text-red-500",
   listClasses: "rounded-md border shadow-sm",
   titleClasses: "text-lg font-medium mb-2",
+};
+
+export const DocumentClasses = {
+  container:
+    "min-h-[500px] max-w-3xl space-y-6 rounded-lg bg-white p-4 shadow-md md:w-[48rem]",
+  layoutClasses: "flex items-center justify-center p-4",
+};
+
+export const UnitClasses = {
+  button:
+    "w-full rounded-lg bg-indigo-600 px-4 py-3 text-white transition-colors hover:bg-indigo-700",
+  header: "sticky top-0 z-10 bg-white",
 };

@@ -5,6 +5,8 @@ import { showSuccessToast, showErrorToast } from "@/utils/helpers/toastUtils";
 import { MdCancel } from "react-icons/md";
 import Modal from "@/components/portal/modal/Modal";
 import { useNavigate } from "react-router-dom";
+import { DocumentClasses, UnitClasses } from "@/utils/styles/globalStyeld";
+import { twMerge } from "tailwind-merge";
 
 interface Document {
   title: string;
@@ -80,12 +82,12 @@ export default function MarkdownEditor() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="mx-auto max-w-2xl space-y-6 rounded-xl border border-gray-100 bg-white p-6 shadow-lg">
+      <div className={twMerge(DocumentClasses.container)}>
         <div>
           <div className="flex items-center justify-between">
-            <label className="mb-3 block text-lg font-semibold text-gray-800">
+            <p className="mb-3 text-lg font-semibold text-gray-800">
               회의록 제목
-            </label>
+            </p>
             <button type="button" onClick={handleCancel}>
               <MdCancel size={24} className="-mt-4 text-red-500" />
             </button>
@@ -99,9 +101,9 @@ export default function MarkdownEditor() {
           />
         </div>
         <div>
-          <label className="mb-3 block text-lg font-semibold text-gray-800">
+          <p className="mb-3 text-lg font-semibold text-gray-800">
             회의록 작성
-          </label>
+          </p>
           <div
             data-color-mode="light"
             className="rounded-lg border border-gray-200 shadow-sm"
@@ -117,10 +119,7 @@ export default function MarkdownEditor() {
             />
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full rounded-lg bg-indigo-600 px-4 py-3 text-white transition-colors hover:bg-indigo-700"
-        >
+        <button type="submit" className={twMerge(UnitClasses.button)}>
           제출하기
         </button>
         <Toastify
