@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import MeetingCard from "@/components/chips/proceedings/MeetingCard";
 import CreationItem from "@/components/chips/CreationItem";
 import ToggleNav from "@/components/layout/toggleNav";
+import SearchInput from "@/components/ui/search/SearchInput";
 
 export default function ProjectPage() {
   const { id } = useParams();
@@ -23,10 +24,13 @@ export default function ProjectPage() {
           )}
         >
           <ToggleNav />
-          <div className="flex items-center gap-2 border-2 border-black p-2">
-            <input type="text" />
-            <button>검색</button>
-          </div>
+          <SearchInput
+            placeholder="회의 목록을 검색해보세요"
+            onClick={() => {
+              alert("검색");
+            }}
+            onChange={() => {}}
+          />
         </div>
         <div className={twMerge(MainLayoutClasses.padding)}>
           <div className={twMerge(MainLayoutClasses.grid)}>

@@ -5,12 +5,13 @@ import Header from "@/components/layout/Header";
 import ProjectCard from "@/components/chips/projects/ProjectCard";
 import CreationItem from "@/components/chips/CreationItem";
 import Sidebar from "@/components/layout/sidebar/Sidebar";
+import SearchInput from "@/components/ui/search/SearchInput";
 
 // TODO : 한페이지엔 최대 7개의 프로젝트만 보여줄것, 페이지네이션 버튼 구현
 
 export default function ProjectsPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const fetchdataProjectCardLength = 7;
+  const fetchdataProjectCardLength = 2;
 
   return (
     <div>
@@ -23,10 +24,13 @@ export default function ProjectsPage() {
           "justify-center"
         )}
       >
-        <div className="flex items-center gap-2 border-2 border-black p-2">
-          <input type="text" />
-          <button>검색</button>
-        </div>
+        <SearchInput
+          placeholder="프로젝트를 검색해보세요"
+          onClick={() => {
+            alert("검색");
+          }}
+          onChange={() => {}}
+        />
       </div>
       <div className={twMerge(MainLayoutClasses.padding)}>
         <div className={twMerge(MainLayoutClasses.grid)}>
