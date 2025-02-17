@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MainLayoutClasses } from "@/utils/styles/globalStyeld";
+import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import Header from "@/components/layout/Header";
 import ProjectCard from "@/components/chips/projects/ProjectCard";
@@ -14,9 +14,14 @@ export default function ProjectsPage() {
 
   return (
     <div>
-      <Header title="Ai-Zy 루트페이지" />
+      <div className={twMerge(UnitClasses.header)}>
+        <Header title="Ai-Zy 루트페이지" />
+      </div>
       <div
-        className={twMerge(MainLayoutClasses.headerPadding, "justify-center")}
+        className={twMerge(
+          MainLayoutClasses.headerNavPadding,
+          "justify-center"
+        )}
       >
         <div className="flex items-center gap-2 border-2 border-black p-2">
           <input type="text" />
