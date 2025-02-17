@@ -17,7 +17,7 @@ export default function TodolistPage() {
           "justify-between"
         )}
       >
-        <ToggleNav />
+        <ToggleNav tabIndex={1} />
         <SearchInput
           placeholder="투두리스트를 검색해보세요"
           onClick={() => {

@@ -14,6 +14,10 @@ export default function ProjectsPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const fetchdataProjectCardLength = 2;
 
+  function handleSidebarClose() {
+    setIsSidebarOpen(false);
+  }
+
   return (
     <div>
       <div className={twMerge(UnitClasses.header)}>
@@ -28,7 +32,7 @@ export default function ProjectsPage() {
         <SearchInput
           placeholder="프로젝트를 검색해보세요"
           onClick={() => {
-            alert("검색");
+            alert("검색 기능 추가 예정");
           }}
           onChange={() => {}}
         />
@@ -57,10 +61,7 @@ export default function ProjectsPage() {
         </div>
         <ChatInterface />
       </div>
-      <Sidebar
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-      />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleSidebarClose} />
     </div>
   );
 }

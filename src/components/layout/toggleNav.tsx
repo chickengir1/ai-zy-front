@@ -1,28 +1,26 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { getActiveTab, tabs } from "@/utils/helpers/routeConfig";
+import {
+  tabs,
+  isValidTabIndex,
+  getChangeTab,
+} from "@/utils/helpers/routeConfig";
+import { useNavigate, useParams } from "react-router-dom";
 
-// NOTE : 해당 컴포넌트는 책임이 크지 않아서 따로 함수를 분리하지 않을 예정
-export default function ToggleNav() {
+interface ToggleNavProps {
+  tabIndex: number;
+}
+
+export default function ToggleNav({ tabIndex }: ToggleNavProps) {
   const { id } = useParams();
-  const location = useLocation();
   const navigate = useNavigate();
 
-  function handleTabClick(tabId: string) {
+  if (!isValidTabIndex(tabIndex)) {
+    return null;
+  }
+
+  function handleTabClick(tabId: number) {
     const basePath = `/projects/${id}`;
-    navigate(tabId === "proceedings" ? basePath : `${basePath}/${tabId}`);
-  }
-
-  function isActiveTab(tabId: string) {
-    const activeTab = getActiveTab(tabs, location);
-    return activeTab === tabId || (tabId === "proceedings" && !activeTab);
-  }
-
-  function getTabClassName(tabId: string) {
-    const baseClasses =
-      "rounded-md px-6 py-2 text-sm font-medium transition-colors";
-    return isActiveTab(tabId)
-      ? `${baseClasses} bg-white text-[#343434] shadow-sm`
-      : `${baseClasses} text-gray-600 hover:text-gray-900`;
+    const path = tabId === 0 ? basePath : `${basePath}/todolist`;
+    navigate(path);
   }
 
   return (
@@ -32,7 +30,7 @@ export default function ToggleNav() {
           <button
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={getTabClassName(tab.id)}
+            className={getChangeTab(tab.id, tabIndex)}
           >
             {tab.label}
           </button>
