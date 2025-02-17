@@ -7,6 +7,7 @@ interface ProjectFormProps {
   setProjectName: (value: string) => void;
   setProjectDescription: (value: string) => void;
 }
+// NOTE : 이벤트 타입 나중에 한군데 모으기
 
 export default function ProjectForm({
   projectName,
@@ -14,6 +15,16 @@ export default function ProjectForm({
   setProjectName,
   setProjectDescription,
 }: ProjectFormProps) {
+  function handleProjectNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setProjectName(e.target.value);
+  }
+
+  function handleProjectDescriptionChange(
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) {
+    setProjectDescription(e.target.value);
+  }
+
   return (
     <div>
       <div className="mb-4">
@@ -26,7 +37,7 @@ export default function ProjectForm({
             SidebarClasses.listClasses
           )}
           value={projectName}
-          onChange={(e) => setProjectName(e.target.value)}
+          onChange={handleProjectNameChange}
         />
       </div>
       <div>
@@ -39,7 +50,7 @@ export default function ProjectForm({
             "h-24 resize-none"
           )}
           value={projectDescription}
-          onChange={(e) => setProjectDescription(e.target.value)}
+          onChange={handleProjectDescriptionChange}
         />
       </div>
     </div>

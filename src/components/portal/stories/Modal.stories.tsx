@@ -21,13 +21,16 @@ export const Default: Story = {
   render: function Render() {
     const [isOpen, setIsOpen] = useState(false);
 
+    function handleOpenModal() {
+      setIsOpen(true);
+    }
+
+    function handleCloseModal() {
+      setIsOpen(false);
+    }
     return (
       <div>
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          title="모달입니다"
-        >
+        <Modal isOpen={isOpen} onClose={handleCloseModal} title="모달입니다">
           <div className="flex flex-col gap-4">
             <div>이건 모달입니다.</div>
             <span>여러가지 내용을 추가 할 수 있어요.</span>
@@ -44,7 +47,7 @@ export const Default: Story = {
         </Modal>
         <button
           className="cursor-pointer rounded border bg-gray-500 px-2 py-1 text-white"
-          onClick={() => setIsOpen(true)}
+          onClick={handleOpenModal}
         >
           모달 열기
         </button>

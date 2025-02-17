@@ -1,8 +1,12 @@
-import { Location } from "react-router-dom";
-
 interface RouteConfig {
   path: string;
   shouldShowHeader: boolean;
+}
+
+interface Tab {
+  id: number;
+  label: string;
+  value: string;
 }
 
 export const HEADER_ROUTES: RouteConfig[] = [
@@ -15,16 +19,18 @@ export const HEADER_ROUTES: RouteConfig[] = [
   { path: "/projects/:id/todolist", shouldShowHeader: true },
 ];
 
-export const tabs = [
-  { id: "proceedings", label: "회의내역" },
-  { id: "todolist", label: "일정관리" },
+export const tabs: Tab[] = [
+  { id: 0, label: "회의내역", value: "proceedings" },
+  { id: 1, label: "일정관리", value: "todolist" },
 ];
+export function isValidTabIndex(tabIndex: number): boolean {
+  return tabIndex >= 0 && tabIndex < tabs.length;
+}
 
-export function getActiveTab(
-  tabs: { id: string; label: string }[],
-  location: Location
-): string {
-  const segments = location.pathname.split("/");
-  const tabId = segments[segments.indexOf("projects") + 2] || "";
-  return tabs.find((tab) => tab.id === tabId)?.id || "";
+export function getChangeTab(tabId: number, currentTabIndex: number) {
+  const baseClasses =
+    "rounded-md px-6 py-2 text-sm font-medium transition-colors";
+  return tabId === currentTabIndex
+    ? `${baseClasses} bg-white text-[#343434] shadow-sm`
+    : `${baseClasses} text-gray-600 hover:text-gray-900`;
 }

@@ -1,9 +1,8 @@
-import React from "react";
 import InvitedList from "./InvitedList";
 import { useEmailValidation } from "@/hooks/utils/sidebar/useEmailValidation";
 import { SidebarClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-
+import { toast } from "react-toastify";
 interface InviteSectionProps {
   inviteEmail: string;
   invitedTeamMembers: string[];
@@ -21,10 +20,19 @@ export default function InviteSection({
   const validation = useEmailValidation(inviteEmail);
 
   function handleInvite() {
-    if (inviteEmail.trim() !== "") {
-      getInvitedMembers([...invitedTeamMembers, inviteEmail.trim()]);
-      setInviteEmail("");
+    const trimmedEmail = inviteEmail.trim();
+
+    if (!trimmedEmail) {
+      return;
     }
+
+    if (invitedTeamMembers.includes(trimmedEmail)) {
+      toast.error("이미 초대된 이메일입니다.");
+      return;
+    }
+
+    getInvitedMembers([...invitedTeamMembers, trimmedEmail]);
+    setInviteEmail("");
   }
 
   function handleRemoveMember(email: string) {
@@ -72,7 +80,9 @@ export default function InviteSection({
           </div>
         </div>
       </div>
-      <p className={twMerge(SidebarClasses.titleClasses)}>초대된 팀원</p>
+      <p className={twMerge(SidebarClasses.titleClasses, "mt-2")}>
+        초대된 팀원
+      </p>
       <div
         className={twMerge(
           SidebarClasses.listClasses,

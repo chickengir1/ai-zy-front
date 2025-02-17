@@ -15,11 +15,10 @@ interface Document {
   participants: string[];
 }
 
-// TODO : 월요일에 코드 분리할 것
-// TODO : 폼 제출 성공일때 proceedings 페이지로 이동
-// NOTE : 훅 2개, 제출 폼, 원래 문서 내용 가져오기는 훅
-
 export default function MarkdownEditor() {
+  // TODO : 폼 제출 성공일때 proceedings 페이지로 이동
+  // NOTE : 훅 2개, 제출 폼, 원래 문서 내용 가져오기는 훅
+  // -------------------------------------------------------------------------
   const MOCK_PARTICIPANTS: string[] = ["김철수", "이영희", "박영수"];
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,8 +46,8 @@ export default function MarkdownEditor() {
     updateDocumentField("title", e.target.value);
   }
 
-  function handleEditorChange(value: string) {
-    updateDocumentField("content", value);
+  function handleEditorChange(value: string | undefined) {
+    updateDocumentField("content", value || "");
   }
 
   function resetDocument() {
@@ -76,8 +75,18 @@ export default function MarkdownEditor() {
       return;
     }
   }
-  function handleCancel() {
+  // -------------------------------------------------------------------------
+
+  function handleCancelWriting() {
     setIsModalOpen(true);
+  }
+
+  function handleContinueWriting() {
+    setIsModalOpen(false);
+  }
+
+  function onNavigate() {
+    navigate(-1);
   }
 
   return (
@@ -88,7 +97,7 @@ export default function MarkdownEditor() {
             <p className="mb-3 text-lg font-semibold text-gray-800">
               회의록 제목
             </p>
-            <button type="button" onClick={handleCancel}>
+            <button type="button" onClick={handleCancelWriting}>
               <MdCancel size={24} className="-mt-4 text-red-500" />
             </button>
           </div>
@@ -111,7 +120,7 @@ export default function MarkdownEditor() {
             <MDEditor
               height={400}
               value={document.content}
-              onChange={(value) => handleEditorChange(value || "")}
+              onChange={handleEditorChange}
               preview="edit"
               hideToolbar={false}
               className="rounded-lg"
@@ -132,7 +141,7 @@ export default function MarkdownEditor() {
       </div>
       <Modal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleContinueWriting}
         title="회의록 작성 취소"
       >
         <div className="mb-6">
@@ -141,13 +150,13 @@ export default function MarkdownEditor() {
         </div>
         <div className="flex justify-end space-x-3">
           <button
-            onClick={() => setIsModalOpen(false)}
+            onClick={handleContinueWriting}
             className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             계속 작성하기
           </button>
           <button
-            onClick={() => navigate(-1)}
+            onClick={onNavigate}
             className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             취소

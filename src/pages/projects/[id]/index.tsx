@@ -23,7 +23,7 @@ export default function ProjectPage() {
             "justify-between"
           )}
         >
-          <ToggleNav />
+          <ToggleNav tabIndex={0} />
           <SearchInput
             placeholder="회의 목록을 검색해보세요"
             onClick={() => {

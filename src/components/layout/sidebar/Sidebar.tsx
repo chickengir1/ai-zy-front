@@ -10,8 +10,8 @@ import { UnitClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 
 interface SidebarProps {
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: (isOpen: boolean) => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 interface SidebarFormProps {
@@ -24,10 +24,7 @@ interface SidebarFormProps {
 // NOTE : props로 받아오기
 const tag = ["태그1", "태그2", "태그3"];
 
-export default function Sidebar({
-  isSidebarOpen,
-  setIsSidebarOpen,
-}: SidebarProps) {
+export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   // NOTE : useSidebarFormData 훅으로 분리
   const [inviteEmail, setInviteEmail] = useState<string>("");
   const [sidebarFormData, setSidebarFormData] = useState<SidebarFormProps>({
@@ -37,11 +34,13 @@ export default function Sidebar({
     invitedTeamMembers: [],
   });
 
-  function getInvitedMembers(members: string[]) {
-    setSidebarFormData((prev) => ({
-      ...prev,
-      invitedTeamMembers: members,
-    }));
+  function handleFormChange(field: string) {
+    return (value: string) => {
+      setSidebarFormData((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    };
   }
 
   function getTag(tag: string) {
@@ -51,13 +50,11 @@ export default function Sidebar({
     }));
   }
 
-  function handleFormChange(field: string) {
-    return (value: string) => {
-      setSidebarFormData((prev) => ({
-        ...prev,
-        [field]: value,
-      }));
-    };
+  function getInvitedMembers(members: string[]) {
+    setSidebarFormData((prev) => ({
+      ...prev,
+      invitedTeamMembers: members,
+    }));
   }
 
   function handleCheckForm() {
@@ -78,7 +75,7 @@ export default function Sidebar({
       });
       setInviteEmail("");
       setTimeout(() => {
-        setIsSidebarOpen(false);
+        onClose();
       }, 1250);
     }
   }
@@ -91,7 +88,7 @@ export default function Sidebar({
 
   return (
     <AnimatePresence>
-      {isSidebarOpen && (
+      {isOpen && (
         <div>
           <form onSubmit={handleSubmit}>
             <motion.div
@@ -99,7 +96,7 @@ export default function Sidebar({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-40 bg-black/50"
-              onClick={() => setIsSidebarOpen(false)}
+              onClick={onClose}
             />
             <motion.div
               initial={{ x: "100%" }}
@@ -108,7 +105,7 @@ export default function Sidebar({
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="fixed right-0 top-0 z-50 h-full w-full overflow-y-auto bg-white shadow-lg md:w-1/2"
             >
-              <SidebarHeader setIsSidebarOpen={setIsSidebarOpen} />
+              <SidebarHeader onClose={onClose} />
               <div className="flex flex-col gap-4 p-4">
                 <ProjectForm
                   projectName={sidebarFormData.projectName}

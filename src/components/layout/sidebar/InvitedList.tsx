@@ -11,6 +11,13 @@ export default function InvitedList({
 }: InvitedListProps) {
   if (invitedTeamMembers.length === 0) return null;
 
+  function handleRemoveMember(email: string) {
+    return function (e: React.MouseEvent<HTMLButtonElement>) {
+      e.preventDefault();
+      onRemoveMember(email);
+    };
+  }
+
   return (
     <ul className="flex max-h-[130px] flex-col gap-2 overflow-y-auto md:grid md:grid-cols-2">
       {invitedTeamMembers.map((member) => (
@@ -25,7 +32,7 @@ export default function InvitedList({
           <button
             type="button"
             className="text-red-500 hover:text-red-600"
-            onClick={() => onRemoveMember(member)}
+            onClick={handleRemoveMember(member)}
           >
             <FiX className="h-5 w-5" />
           </button>

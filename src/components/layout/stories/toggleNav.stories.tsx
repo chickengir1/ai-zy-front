@@ -6,36 +6,19 @@ const meta: Meta<typeof ToggleNav> = {
   title: "Layout/ToggleNav",
   component: ToggleNav,
   tags: ["autodocs"],
+  args: {
+    tabIndex: 0,
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof ToggleNav>;
 
-export const ProceedingsTab: Story = {
-  args: {
-    location: {
-      pathname: "/projects/123/proceedings",
-    },
-  },
+export const Default: Story = {
   decorators: [
     (Story) => (
       <MemoryRouter initialEntries={["/projects/123/proceedings"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
-
-export const TodolistTab: Story = {
-  args: {
-    location: {
-      pathname: "/projects/123/todolist",
-    },
-  },
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/projects/123/todolist"]}>
         <Story />
       </MemoryRouter>
     ),
