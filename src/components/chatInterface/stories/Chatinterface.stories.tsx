@@ -7,9 +7,8 @@ const meta: Meta<typeof ChatInterface> = {
   tags: ["autodocs"],
   parameters: {
     docs: {
-      iframeHeight: 500,
+      iframeHeight: 800,
     },
-    layout: "fullscreen",
   },
 };
 
@@ -17,4 +16,10 @@ export default meta;
 
 type Story = StoryObj<typeof ChatInterface>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: () => (
+    <div className="relative h-screen">
+      <ChatInterface />
+    </div>
+  ),
+};
