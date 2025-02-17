@@ -6,6 +6,7 @@ import ProjectCard from "@/components/chips/projects/ProjectCard";
 import CreationItem from "@/components/chips/CreationItem";
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import SearchInput from "@/components/ui/search/SearchInput";
+import ChatInterface from "@/components/chatInterface/ChatInterface";
 
 // TODO : 한페이지엔 최대 7개의 프로젝트만 보여줄것, 페이지네이션 버튼 구현
 
@@ -54,6 +55,7 @@ export default function ProjectsPage() {
             }}
           />
         </div>
+        <ChatInterface />
       </div>
       <Sidebar
         isSidebarOpen={isSidebarOpen}
