@@ -27,6 +27,10 @@ export default function ProjectsPage() {
     toggleChat();
   }
 
+  function handleSearch() {
+    alert("검색 기능 추가 예정");
+  }
+
   return (
     <div>
       <div className={twMerge(UnitClasses.header)}>
@@ -40,9 +44,7 @@ export default function ProjectsPage() {
       >
         <SearchInput
           placeholder="프로젝트를 검색해보세요"
-          onClick={() => {
-            alert("검색 기능 추가 예정");
-          }}
+          onClick={handleSearch}
           onChange={() => {}}
         />
       </div>
@@ -62,11 +64,7 @@ export default function ProjectsPage() {
               />
             )
           )}
-          <CreationItem
-            onClick={() => {
-              toggleSidebar();
-            }}
-          />
+          <CreationItem onClick={toggleSidebar} />
         </div>
         <button onClick={toggleChat} className="fixed bottom-4 right-4 z-50">
           <HiChatAlt className="h-8 w-8 scale-x-[-1] transform md:h-10 md:w-10 lg:h-12 lg:w-12" />
