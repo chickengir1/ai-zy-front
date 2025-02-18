@@ -4,13 +4,14 @@ import Toastify from "@/components/ui/toast/Toastify";
 import { showSuccessToast, showErrorToast } from "@/utils/helpers/toastUtils";
 import { MdCancel } from "react-icons/md";
 import Modal from "@/components/portal/modal/Modal";
-import { useNavigate } from "react-router-dom";
 import {
   DocumentClasses,
   UnitClasses,
   SidebarClasses,
 } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
+import { useToggle } from "@/hooks/ui/useToggle";
+import { useNavigation } from "@/hooks/ui/useNavigation";
 
 interface Document {
   title: string;
@@ -24,8 +25,8 @@ export default function MarkdownEditor() {
   // NOTE : 훅 2개, 제출 폼, 원래 문서 내용 가져오기는 훅
   // -------------------------------------------------------------------------
   const MOCK_PARTICIPANTS: string[] = ["김철수", "이영희", "박영수"];
-  const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { goBack } = useNavigation();
+  const [isModalOpen, toggleModal] = useToggle(false);
   const [document, setDocument] = useState<Document>({
     title: "",
     content: "",
@@ -82,15 +83,7 @@ export default function MarkdownEditor() {
   // -------------------------------------------------------------------------
 
   function handleCancelWriting() {
-    setIsModalOpen(true);
-  }
-
-  function handleContinueWriting() {
-    setIsModalOpen(false);
-  }
-
-  function onNavigate() {
-    navigate(-1);
+    toggleModal();
   }
 
   return (
@@ -150,7 +143,7 @@ export default function MarkdownEditor() {
       </div>
       <Modal
         isOpen={isModalOpen}
-        onClose={handleContinueWriting}
+        onClose={handleCancelWriting}
         title="회의록 작성 취소"
       >
         <div className="mb-6">
@@ -159,13 +152,13 @@ export default function MarkdownEditor() {
         </div>
         <div className="flex justify-end space-x-3">
           <button
-            onClick={handleContinueWriting}
+            onClick={handleCancelWriting}
             className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             계속 작성하기
           </button>
           <button
-            onClick={onNavigate}
+            onClick={goBack}
             className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             취소

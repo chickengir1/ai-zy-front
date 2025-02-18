@@ -1,8 +1,9 @@
 import { HEADER_ROUTES } from "@/utils/helpers/routeConfig";
-import { useMatch, useNavigate } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { HeaderClasses } from "@/utils/styles/globalStyeld";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { useNavigation } from "@/hooks/ui/useNavigation";
 
 interface HeaderProps {
   title: string;
@@ -17,7 +18,7 @@ function shouldDisplayHeader(): boolean {
 }
 
 export default function Header({ title, className }: HeaderProps) {
-  const navigate = useNavigate();
+  const { goBack } = useNavigation();
   const shouldHideButton =
     location.pathname === "/" || location.pathname === "/projects";
 
@@ -25,7 +26,7 @@ export default function Header({ title, className }: HeaderProps) {
     if (shouldHideButton) {
       return;
     }
-    navigate(-1);
+    goBack();
   }
 
   return (

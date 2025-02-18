@@ -1,13 +1,13 @@
 import { useResizeHandler } from "@/hooks/ui/useResizeHandler";
 import { MIN_WIDTH } from "@/utils/constants";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigation } from "@/hooks/ui/useNavigation";
 
 const Unsupported = () => {
-  const navigate = useNavigate();
+  const { goBack } = useNavigation();
 
   useResizeHandler(MIN_WIDTH, () => {
-    navigate(-1);
+    goBack();
   });
 
   return (
