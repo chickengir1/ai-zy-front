@@ -7,7 +7,6 @@ interface ProjectFormProps {
   setProjectName: (value: string) => void;
   setProjectDescription: (value: string) => void;
 }
-// NOTE : 이벤트 타입 나중에 한군데 모으기
 
 export default function ProjectForm({
   projectName,
@@ -15,6 +14,7 @@ export default function ProjectForm({
   setProjectName,
   setProjectDescription,
 }: ProjectFormProps) {
+  // NOTE : 이벤트 타입 나중에 한군데 모으기
   function handleProjectNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     setProjectName(e.target.value);
   }
@@ -30,10 +30,12 @@ export default function ProjectForm({
       <div className="mb-4">
         <p className={twMerge(SidebarClasses.titleClasses)}>프로젝트 이름</p>
         <input
+          autoFocus
           type="text"
           placeholder="프로젝트 이름을 입력하세요"
           className={twMerge(
             SidebarClasses.inputClasses,
+            SidebarClasses.inputFocus,
             SidebarClasses.listClasses
           )}
           value={projectName}
@@ -46,6 +48,7 @@ export default function ProjectForm({
           placeholder="프로젝트 설명을 입력하세요"
           className={twMerge(
             SidebarClasses.inputClasses,
+            SidebarClasses.inputFocus,
             SidebarClasses.listClasses,
             "h-24 resize-none"
           )}

@@ -2,7 +2,7 @@ import { FaRegCalendarCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ParticipantIcons from "../projects/ParticipantIcons";
 import { twMerge } from "tailwind-merge";
-import { baseClasses, sharedCardStyles } from "@/utils/styles/globalStyeld";
+import { BaseClasses, SharedCardStyles } from "@/utils/styles/globalStyeld";
 interface MeetingCardProps {
   participantCount: number;
   name: string;
@@ -24,7 +24,7 @@ export default function MeetingCard({
     <Link to={linkTo}>
       <div
         className={twMerge(
-          baseClasses.container,
+          BaseClasses.container,
           "relative flex flex-col gap-4 bg-white p-4"
         )}
       >
@@ -34,14 +34,14 @@ export default function MeetingCard({
               <FaRegCalendarCheck className="text-blue-500" size={20} />
             </span>
             <div className="max-w-[130px]">
-              <h2 className={twMerge(sharedCardStyles.title)}>{name}</h2>
-              <p className={twMerge(sharedCardStyles.description)}>
+              <h2 className={twMerge(SharedCardStyles.title)}>{name}</h2>
+              <p className={twMerge(SharedCardStyles.description)}>
                 {createdAt}
               </p>
             </div>
           </div>
           <span
-            className={twMerge(sharedCardStyles.tag, "absolute right-0 top-0")}
+            className={twMerge(SharedCardStyles.tag, "absolute right-0 top-0")}
           >
             {tag}
           </span>
@@ -49,9 +49,9 @@ export default function MeetingCard({
         <blockquote className="h-[100px] overflow-y-auto rounded-r border-l-4 border-gray-300 bg-gray-200 p-2 text-sm md:h-[160px]">
           <p className="whitespace-pre-line break-words">{description}</p>
         </blockquote>
-        <footer className={twMerge(sharedCardStyles.footer)}>
+        <footer className={twMerge(SharedCardStyles.footer)}>
           <ParticipantIcons count={participantCount} />
-          <span className={sharedCardStyles.participantText}>
+          <span className={SharedCardStyles.participantText}>
             {participantCount}명의 참가자
           </span>
         </footer>

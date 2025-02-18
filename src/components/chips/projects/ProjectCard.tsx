@@ -1,8 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
-
 import ParticipantIcons from "./ParticipantIcons";
-import { baseClasses, sharedCardStyles } from "@/utils/styles/globalStyeld";
+import { BaseClasses, SharedCardStyles } from "@/utils/styles/globalStyeld";
 
 interface ProjectCardProps {
   participantCount: number;
@@ -28,20 +27,20 @@ export default function ProjectCard({
       <div
         className={twMerge(
           "flex flex-col justify-end bg-gradient-to-b",
-          baseClasses.container,
+          BaseClasses.container,
           gradientFrom,
           gradientTo
         )}
       >
-        <span className={twMerge(sharedCardStyles.tag)}>{tag}</span>
+        <span className={twMerge(SharedCardStyles.tag)}>{tag}</span>
         <div className="flex flex-col gap-2 rounded-b-2xl border bg-[#f9f9f9] p-4">
-          <h2 className={twMerge(sharedCardStyles.title)}>{name}</h2>
-          <p className={twMerge(sharedCardStyles.description, "-mt-2")}>
+          <h2 className={twMerge(SharedCardStyles.title)}>{name}</h2>
+          <p className={twMerge(SharedCardStyles.description, "-mt-2")}>
             {description}
           </p>
-          <footer className={twMerge(sharedCardStyles.footer)}>
+          <footer className={twMerge(SharedCardStyles.footer)}>
             <ParticipantIcons count={participantCount} />
-            <span className={twMerge(sharedCardStyles.participantText)}>
+            <span className={twMerge(SharedCardStyles.participantText)}>
               {participantCount}명의 참가자
             </span>
           </footer>
