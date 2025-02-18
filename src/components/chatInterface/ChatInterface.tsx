@@ -57,6 +57,7 @@ export default function ChatInterface() {
             <div className="flex space-x-2">
               {/** input구분 해야함- 일반 input || react-mentions input*/}
               <input
+                autoFocus
                 type="text"
                 value={input}
                 onChange={handleInputChange}

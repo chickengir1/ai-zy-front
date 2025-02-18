@@ -27,7 +27,8 @@ export default function TagSelect({
             "transition-all duration-200 ease-in-out",
             "hover:border-gray-400",
             SidebarClasses.inputClasses,
-            SidebarClasses.listClasses
+            SidebarClasses.listClasses,
+            SidebarClasses.inputFocus
           )}
           value={selectedTag}
           onChange={handleTagChange}

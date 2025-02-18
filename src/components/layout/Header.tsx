@@ -1,6 +1,8 @@
 import { HEADER_ROUTES } from "@/utils/helpers/routeConfig";
-import { useMatch } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
+import { HeaderClasses } from "@/utils/styles/globalStyeld";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 interface HeaderProps {
   title: string;
@@ -15,14 +17,42 @@ function shouldDisplayHeader(): boolean {
 }
 
 export default function Header({ title, className }: HeaderProps) {
-  const headerResponsive = "sm:px-3 sm:py-6 lg:px-4 lg:py-8";
-  const headerClasses = twMerge("text-lg sm:text-xl lg:text-2xl", className);
+  const navigate = useNavigate();
+  const shouldHideButton =
+    location.pathname === "/" || location.pathname === "/projects";
+
+  function handleNavigation() {
+    if (shouldHideButton) {
+      return;
+    }
+    navigate(-1);
+  }
 
   return (
     <header
-      className={`flex w-full items-center justify-between bg-white px-2 py-4 shadow-md ${headerResponsive}`}
+      className={twMerge(
+        "flex w-full items-center justify-between bg-white px-2 py-4 shadow-md",
+        HeaderClasses.headerResponsive,
+        className
+      )}
     >
-      {shouldDisplayHeader() && <h1 className={headerClasses}>{title}</h1>}
+      <div className="flex w-full items-center justify-between">
+        {shouldDisplayHeader() && (
+          <h1 className={HeaderClasses.headerClasses}>{title}</h1>
+        )}
+        {!shouldHideButton && (
+          <button
+            onClick={handleNavigation}
+            className={twMerge(HeaderClasses.backButton)}
+          >
+            <IoArrowBackCircleOutline
+              size={24}
+              className={HeaderClasses.backButtonIcon}
+            />
+            <p className="text-base font-semibold">Back</p>
+          </button>
+        )}
+      </div>
     </header>
   );
 }

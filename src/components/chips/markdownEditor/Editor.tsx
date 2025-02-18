@@ -5,7 +5,11 @@ import { showSuccessToast, showErrorToast } from "@/utils/helpers/toastUtils";
 import { MdCancel } from "react-icons/md";
 import Modal from "@/components/portal/modal/Modal";
 import { useNavigate } from "react-router-dom";
-import { DocumentClasses, UnitClasses } from "@/utils/styles/globalStyeld";
+import {
+  DocumentClasses,
+  UnitClasses,
+  SidebarClasses,
+} from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 
 interface Document {
@@ -102,9 +106,14 @@ export default function MarkdownEditor() {
             </button>
           </div>
           <input
+            autoFocus
             type="text"
             placeholder="회의록 제목 작성"
-            className="w-full rounded-lg border border-gray-200 px-4 py-3 text-gray-700 outline-none"
+            className={twMerge(
+              SidebarClasses.inputClasses,
+              SidebarClasses.inputFocus,
+              SidebarClasses.listClasses
+            )}
             value={document.title}
             onChange={handleTitleChange}
           />
