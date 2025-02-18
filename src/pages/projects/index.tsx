@@ -1,21 +1,30 @@
-import { useState } from "react";
 import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
+import { HiChatAlt } from "react-icons/hi";
 import Header from "@/components/layout/Header";
 import ProjectCard from "@/components/chips/projects/ProjectCard";
 import CreationItem from "@/components/chips/CreationItem";
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import SearchInput from "@/components/ui/search/SearchInput";
 import ChatInterface from "@/components/chatInterface/ChatInterface";
+import { useKeyPress } from "@/hooks/utils/chatInterface/useKeyPress";
+import { useToggle } from "@/hooks/ui/useToggle";
 
 // TODO : 한페이지엔 최대 7개의 프로젝트만 보여줄것, 페이지네이션 버튼 구현
+const fetchdataProjectCardLength = 2;
 
 export default function ProjectsPage() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const fetchdataProjectCardLength = 2;
+  const [isSidebarOpen, toggleSidebar] = useToggle(false);
+  const [isChatOpen, toggleChat] = useToggle(false);
+
+  useKeyPress({ targetKey: "i", callback: handleChatToggle });
 
   function handleSidebarClose() {
-    setIsSidebarOpen(false);
+    toggleSidebar();
+  }
+
+  function handleChatToggle() {
+    toggleChat();
   }
 
   return (
@@ -55,11 +64,14 @@ export default function ProjectsPage() {
           )}
           <CreationItem
             onClick={() => {
-              setIsSidebarOpen(!isSidebarOpen);
+              toggleSidebar();
             }}
           />
         </div>
-        <ChatInterface />
+        <button onClick={toggleChat} className="fixed bottom-4 right-4 z-50">
+          <HiChatAlt className="h-8 w-8 scale-x-[-1] transform md:h-10 md:w-10 lg:h-12 lg:w-12" />
+        </button>
+        {isChatOpen && <ChatInterface onClose={handleChatToggle} />}
       </div>
       <Sidebar isOpen={isSidebarOpen} onClose={handleSidebarClose} />
     </div>

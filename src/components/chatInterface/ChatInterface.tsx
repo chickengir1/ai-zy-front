@@ -3,19 +3,19 @@ import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { getModeColors } from "@/utils/helpers/chatUtils";
 import { IoIosSend } from "react-icons/io";
+import { useToggle } from "@/hooks/ui/useToggle";
 
-export default function ChatInterface() {
-  // TODO: 모드 변경 시 메시지 초기화
-  // TODO: 내부 로직 훅으로 분리
-  const [isCommandMode, setIsCommandMode] = useState(false);
+interface ChatInterfaceProps {
+  onClose: () => void;
+}
+
+export default function ChatInterface({ onClose }: ChatInterfaceProps) {
+  // TODO: 모드 변경 시 메시지 초기화, 내부 로직 훅으로 분리
+  const [isCommandMode, toggleMode] = useToggle(false);
   const [messages, setMessages] = useState<
     { id: number; role: "user" | "bot"; content: string }[]
   >([]);
   const [input, setInput] = useState("");
-
-  function toggleMode() {
-    setIsCommandMode((prev) => !prev);
-  }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
@@ -37,13 +37,14 @@ export default function ChatInterface() {
   const colors = getModeColors(isCommandMode);
 
   return (
-    <div className="fixed bottom-0 right-0 flex items-center justify-center p-4">
+    <div className="fixed bottom-16 right-0 flex items-center justify-center p-4">
       <div className="w-full md:w-[576px] md:max-w-xl">
         <div className={`overflow-hidden rounded-md shadow-lg ${colors.bg}`}>
           <ChatHeader
             isCommandMode={isCommandMode}
             toggleMode={toggleMode}
             colors={colors}
+            onClose={onClose}
           />
           <ChatMessages
             messages={messages}

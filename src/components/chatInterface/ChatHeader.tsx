@@ -10,12 +10,14 @@ interface ChatHeaderProps {
     text: string;
     border: string;
   };
+  onClose: () => void;
 }
 
 export function ChatHeader({
   isCommandMode,
   toggleMode,
   colors,
+  onClose,
 }: ChatHeaderProps) {
   return (
     <div
@@ -50,11 +52,7 @@ export function ChatHeader({
             }`}
           ></span>
         </span>
-        <button
-          onClick={() => {
-            alert("닫기 클릭");
-          }}
-        >
+        <button onClick={onClose}>
           <FaTimesCircle
             size={24}
             className={isCommandMode ? "text-white" : "text-red-500"}

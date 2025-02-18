@@ -3,7 +3,8 @@ import {
   isValidTabIndex,
   getChangeTab,
 } from "@/utils/helpers/routeConfig";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useNavigation } from "@/hooks/ui/useNavigation";
 
 interface ToggleNavProps {
   tabIndex: number;
@@ -11,7 +12,7 @@ interface ToggleNavProps {
 
 export default function ToggleNav({ tabIndex }: ToggleNavProps) {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const { goTo } = useNavigation();
 
   if (!isValidTabIndex(tabIndex)) {
     return null;
@@ -20,7 +21,7 @@ export default function ToggleNav({ tabIndex }: ToggleNavProps) {
   function handleTabClick(tabId: number) {
     const basePath = `/projects/${id}`;
     const path = tabId === 0 ? basePath : `${basePath}/todolist`;
-    navigate(path);
+    goTo(path);
   }
 
   return (

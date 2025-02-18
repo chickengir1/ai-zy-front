@@ -1,17 +1,18 @@
 import Header from "@/components/layout/Header";
 import Document from "@/components/chips/proceedings/document/Document";
 import { content } from "@/utils/constants";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DocumentClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
+import { useNavigation } from "@/hooks/ui/useNavigation";
 
 // TODO : Content가 없을때 예외 처리
 export default function DocDetailPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const { goTo } = useNavigation();
 
   function handleSettingOpen() {
-    navigate(`/projects/${id}/proceedings/writes`);
+    goTo(`/projects/${id}/proceedings/writes`);
   }
 
   return (
