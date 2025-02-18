@@ -29,7 +29,7 @@ export function isValidTabIndex(tabIndex: number): boolean {
 
 export function getChangeTab(tabId: number, currentTabIndex: number) {
   const baseClasses =
-    "rounded-md px-6 py-2 text-sm font-medium transition-colors";
+    "rounded-md px-6 py-2 text-xs md:text-sm font-medium transition-colors";
   return tabId === currentTabIndex
     ? `${baseClasses} bg-white text-[#343434] shadow-sm`
     : `${baseClasses} text-gray-600 hover:text-gray-900`;
