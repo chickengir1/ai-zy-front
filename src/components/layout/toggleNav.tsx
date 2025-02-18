@@ -18,10 +18,12 @@ export default function ToggleNav({ tabIndex }: ToggleNavProps) {
     return null;
   }
 
-  function handleTabClick(tabId: number) {
-    const basePath = `/projects/${id}`;
-    const path = tabId === 0 ? basePath : `${basePath}/todolist`;
-    goTo(path);
+  function handleTabClick(tabId: number): () => void {
+    return function (): void {
+      const basePath = `/projects/${id}`;
+      const path = tabId === 0 ? basePath : `${basePath}/todolist`;
+      goTo(path);
+    };
   }
 
   return (
@@ -30,7 +32,7 @@ export default function ToggleNav({ tabIndex }: ToggleNavProps) {
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
+            onClick={handleTabClick(tab.id)}
             className={getChangeTab(tab.id, tabIndex)}
           >
             {tab.label}

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import Header from "@/components/layout/Header";
 import ToggleNav from "@/components/layout/toggleNav";
 import SearchInput from "@/components/ui/search/SearchInput";
+import TodoList from "@/components/todolist/Todolist";
 
 export default function TodolistPage() {
   return (
@@ -11,6 +11,7 @@ export default function TodolistPage() {
       <div className={twMerge(UnitClasses.header)}>
         <Header title="투두리스트 페이지" />
       </div>
+
       <div
         className={twMerge(
           MainLayoutClasses.headerNavPadding,
@@ -26,7 +27,9 @@ export default function TodolistPage() {
           onChange={() => {}}
         />
       </div>
-      <Link to="/">홈페이지로 이동</Link>
+      <div className={twMerge(MainLayoutClasses.padding)}>
+        <TodoList />
+      </div>
     </div>
   );
 }
