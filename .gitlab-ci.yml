@@ -1,0 +1,37 @@
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  image: node:lts
+  script:
+    - npm install
+    - npm run build
+    - npm run chromatic -- --branch dev
+  artifacts:
+    paths:
+      - dist/
+  only:
+    - dev
+
+# 도메인으로 배포 했을때 DNS가 도메인을 인식 못하는 상황
+# 도메인 네임서버에 도메인 등록 후 도메인 연결 확인 후 배포해야 하는데 매니저님께 문의
+deploy:
+  stage: deploy
+  image: alpine
+  before_script:
+    - mkdir -p ~/.ssh
+    - apk add --no-cache openssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - touch ~/.ssh/known_hosts
+    - ssh-keyscan 34.22.99.12 >> ~/.ssh/known_hosts
+  script:
+    - apk add --no-cache rsync openssh
+  only:
+    - dev

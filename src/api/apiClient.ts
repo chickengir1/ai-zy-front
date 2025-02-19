@@ -1,9 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import {
-  setupInterceptors,
-  requestInterceptor,
-  responseInterceptor,
-} from "./interceptors";
+import { setupInterceptors } from "./interceptors";
+import { ApiError } from "./errorHandler";
 
 export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   url: string;
@@ -11,51 +8,66 @@ export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   params?: Record<string, string>;
 }
 
+export interface ApiResponse<T> {
+  data: T;
+  status: number;
+  statusText: string;
+  meta?: {
+    page?: number;
+    limit?: number;
+    total?: number;
+  };
+}
+
 export const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "",
-  headers: { "Content-Type": "application/json" },
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  timeout: 5000,
 });
 
 setupInterceptors(axiosInstance);
-axiosInstance.interceptors.request.use(requestInterceptor);
-axiosInstance.interceptors.response.use(responseInterceptor);
 
 export const apiClient = {
   get: <T>(config: RequestConfig) =>
-    axiosInstance.get<T>(config.url, config).then((res) => res.data),
+    axiosInstance
+      .get<ApiResponse<T>>(config.url, config)
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   post: <T>(config: RequestConfig) =>
     axiosInstance
-      .post<T>(config.url, config.data, config)
-      .then((res) => res.data),
+      .post<ApiResponse<T>>(config.url, config.data, config)
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   put: <T>(config: RequestConfig) =>
     axiosInstance
-      .put<T>(config.url, config.data, config)
-      .then((res) => res.data),
+      .put<ApiResponse<T>>(config.url, config.data, config)
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   patch: <T>(config: RequestConfig) =>
     axiosInstance
-      .patch<T>(config.url, config.data, config)
-      .then((res) => res.data),
+      .patch<ApiResponse<T>>(config.url, config.data, config)
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 
   delete: <T>(config: RequestConfig) =>
-    axiosInstance.delete<T>(config.url, config).then((res) => res.data),
+    axiosInstance
+      .delete<ApiResponse<T>>(config.url, config)
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error as ApiError;
+      }),
 } as const;
-
-// 사용 예시
-// const getConfig: RequestConfig = {
-//   url: "/users",
-//   params: {
-//     page: 1,
-//     limit: 10,
-//   },
-// };
-
-// const postConfig: RequestConfig = {
-//     url: '/users',
-//     data: {
-//       name: 'users',
-//       email: 'users@example.com',
-//     },
-//   };

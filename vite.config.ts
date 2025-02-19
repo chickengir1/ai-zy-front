@@ -9,6 +9,7 @@ export default defineConfig({
     pagesRouter({
       pagesDir: "src/pages",
       notFoundPage: "src/pages/NotFound.tsx",
+      loadingComponent: "src/components/ui/loading/Pulse.tsx",
     }),
   ],
   resolve: {
