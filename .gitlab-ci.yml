@@ -10,6 +10,7 @@ build:
   stage: build
   image: node:lts
   script:
+    - ls -l src/utils/styles/
     - npm install
     - npm run build
   artifacts:
