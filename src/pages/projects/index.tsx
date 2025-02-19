@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 import { HiChatAlt } from "react-icons/hi";
 import Header from "@/components/layout/header/Header";
 import ProjectCard from "@/components/chips/projects/ProjectCard";
-import CreationItem from "@/components/chips/CreationItem";
+import CreationItem from "@/components/chips/creationItem/CreationItem";
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import SearchInput from "@/components/ui/search/SearchInput";
 import ChatInterface from "@/components/chatInterface/ChatInterface";

@@ -1,5 +1,5 @@
 import { MemoryRouter } from "react-router-dom";
-import CreationItem from "@/components/chips/CreationItem";
+import CreationItem from "@/components/chips/creationItem/CreationItem";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof CreationItem> = {
