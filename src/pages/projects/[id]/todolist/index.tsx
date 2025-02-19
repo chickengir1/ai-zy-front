@@ -3,7 +3,7 @@ import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import Header from "@/components/layout/Header";
 import ToggleNav from "@/components/layout/toggleNav";
 import SearchInput from "@/components/ui/search/SearchInput";
-import TodoList from "@/components/todolist/Todolist";
+import TodoList from "@/components/schedule/todolist/Todolist";
 
 export default function TodolistPage() {
   return (
