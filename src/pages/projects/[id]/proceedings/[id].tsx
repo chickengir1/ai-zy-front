@@ -4,7 +4,7 @@ import { content } from "@/utils/constants";
 import { useParams } from "react-router-dom";
 import { DocumentClasses, UnitClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-import { useNavigation } from "@/hooks/ui/useNavigation";
+import { useNavigation } from "@/hooks/utility/useNavigation";
 
 // TODO : Content가 없을때 예외 처리
 export default function DocDetailPage() {

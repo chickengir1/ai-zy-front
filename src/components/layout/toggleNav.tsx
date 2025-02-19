@@ -1,10 +1,10 @@
+import { useNavigation } from "@/hooks/utility/useNavigation";
 import {
   tabs,
   isValidTabIndex,
   getChangeTab,
 } from "@/utils/helpers/routeConfig";
 import { useParams } from "react-router-dom";
-import { useNavigation } from "@/hooks/ui/useNavigation";
 
 interface ToggleNavProps {
   tabIndex: number;
