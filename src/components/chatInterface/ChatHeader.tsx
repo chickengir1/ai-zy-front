@@ -33,8 +33,7 @@ export function ChatHeader({
           {isCommandMode ? "명령모드" : "채팅모드"}
         </h2>
       </div>
-
-      <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center">
+      <label className="relative inline-flex cursor-pointer select-none items-center">
         <input
           type="checkbox"
           checked={isCommandMode}

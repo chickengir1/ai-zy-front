@@ -1,4 +1,5 @@
 import { BsPersonCircle } from "react-icons/bs";
+import { MAX_PARTICIPANT_ICONS } from "@/utils/constants";
 
 interface ParticipantIconsProps {
   count: number;
@@ -9,8 +10,6 @@ export default function ParticipantInDocs({
   count,
   participantNames,
 }: ParticipantIconsProps) {
-  const MAX_PARTICIPANT_ICONS = 3;
-
   const participants = Math.min(count, MAX_PARTICIPANT_ICONS);
   const remainingParticipants = Math.max(count - MAX_PARTICIPANT_ICONS, 0);
 

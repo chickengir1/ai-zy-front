@@ -1,5 +1,5 @@
 import { Pie } from "react-chartjs-2";
-import { usePieChart } from "@/hooks/utility/useChart";
+import { usePieChart } from "@/hooks/ui/charts/useChart";
 
 interface PieChartsProps {
   labels: string[];

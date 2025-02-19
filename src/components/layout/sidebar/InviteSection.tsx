@@ -1,6 +1,6 @@
 import InvitedList from "./InvitedList";
-import { useEmailValidation } from "@/hooks/ui/sidebar/useEmailValidation";
-import { SidebarClasses } from "@/utils/styles/globalStyeld";
+import { useValidation } from "@/hooks/utility/useValidation";
+import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import { toast } from "react-toastify";
 interface InviteSectionProps {
@@ -17,7 +17,7 @@ export default function InviteSection({
   setInviteEmail,
   getInvitedMembers,
 }: InviteSectionProps) {
-  const validation = useEmailValidation(inviteEmail);
+  const validation = useValidation({ email: inviteEmail });
 
   function handleInvite() {
     const trimmedEmail = inviteEmail.trim();
@@ -46,15 +46,15 @@ export default function InviteSection({
   return (
     <div>
       <div>
-        <p className={twMerge(SidebarClasses.titleClasses)}>팀원 초대</p>
+        <p className={twMerge(SidebarClassesStyles.titleClasses)}>팀원 초대</p>
         <div className="flex flex-col">
-          <div className={twMerge(SidebarClasses.listClasses, "flex")}>
+          <div className={twMerge(SidebarClassesStyles.listClasses, "flex")}>
             <input
               type="email"
               placeholder="프로젝트에 팀원을 초대하세요"
               className={twMerge(
-                SidebarClasses.inputClasses,
-                validation.inputClasses
+                SidebarClassesStyles.inputClasses,
+                validation.email.styles.input
               )}
               value={inviteEmail}
               onChange={handleEmailChange}
@@ -62,30 +62,30 @@ export default function InviteSection({
             <button
               type="button"
               onClick={handleInvite}
-              disabled={!validation.isEmailValid}
+              disabled={!validation.email.isValid}
               className={twMerge(
-                SidebarClasses.buttonClasses,
-                validation.buttonClasses
+                SidebarClassesStyles.buttonClasses,
+                validation.email.styles.button
               )}
             >
               초대
             </button>
           </div>
           <div className="h-4">
-            {validation.showError && (
-              <p className={twMerge(SidebarClasses.errorClasses)}>
-                {validation.errorMessage}
+            {validation.email.showError && (
+              <p className={twMerge(SidebarClassesStyles.errorClasses)}>
+                {validation.email.errorMessage}
               </p>
             )}
           </div>
         </div>
       </div>
-      <p className={twMerge(SidebarClasses.titleClasses, "mt-2")}>
+      <p className={twMerge(SidebarClassesStyles.titleClasses, "mt-2")}>
         초대된 팀원
       </p>
       <div
         className={twMerge(
-          SidebarClasses.listClasses,
+          SidebarClassesStyles.listClasses,
           "h-[150px] border-[#E4E4E7] bg-[#F9FAFB] p-2"
         )}
       >
