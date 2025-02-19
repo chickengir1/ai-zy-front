@@ -1,7 +1,7 @@
 import DocumentHeader, { MeetingHeaderProps } from "./DocumentHeader";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { DocumentClasses } from "@/utils/styles/globalStyeld";
+import { DocumentClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 
 interface DocumentProps extends MeetingHeaderProps {
@@ -17,7 +17,7 @@ export default function Document({
   onClickSetting,
 }: DocumentProps) {
   return (
-    <div className={twMerge(DocumentClasses.container)}>
+    <div className={twMerge(DocumentClassesStyles.container)}>
       <DocumentHeader
         title={title}
         date={date}
