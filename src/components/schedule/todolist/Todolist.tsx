@@ -3,7 +3,7 @@ import TabbedFormInput from "./TabbedFormInput";
 import TodoItem from "./TodoItem";
 import PieCharts from "@/components/schedule/charts/PieCharts";
 import { twMerge } from "tailwind-merge";
-import { UnitClasses } from "@/utils/styles/globalStyeld";
+import { UnitClassesStyles } from "@/utils/styles/globalStyeld";
 
 interface TodoForm {
   title: string;
@@ -98,7 +98,7 @@ export default function TodoList() {
           onChange={handleChange}
         />
       </div>
-      <button onClick={addTodo} className={twMerge(UnitClasses.button)}>
+      <button onClick={addTodo} className={twMerge(UnitClassesStyles.button)}>
         투두리스트 추가하기
       </button>
 

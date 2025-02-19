@@ -1,25 +1,28 @@
 import { useParams } from "react-router-dom";
-import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
+import {
+  MainLayoutClassesStyles,
+  UnitClassesStyles,
+} from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import Header from "@/components/layout/Header";
 import MeetingCard from "@/components/chips/proceedings/MeetingCard";
 import CreationItem from "@/components/chips/CreationItem";
 import ToggleNav from "@/components/layout/toggleNav";
 import SearchInput from "@/components/ui/search/SearchInput";
+import { FETCH_DATA_PROJECT_CARD_LENGTH } from "@/utils/constants";
 
 export default function ProjectPage() {
   const { id } = useParams();
-  const fetchdataMeetingCardLendgth = 5;
 
   return (
     <>
-      <div className={twMerge(UnitClasses.header)}>
+      <div className={twMerge(UnitClassesStyles.header)}>
         <Header title="프로젝트 페이지" />
       </div>
       <div>
         <div
           className={twMerge(
-            MainLayoutClasses.headerNavPadding,
+            MainLayoutClassesStyles.headerNavPadding,
             "justify-between"
           )}
         >
@@ -32,9 +35,9 @@ export default function ProjectPage() {
             onChange={() => {}}
           />
         </div>
-        <div className={twMerge(MainLayoutClasses.padding)}>
-          <div className={twMerge(MainLayoutClasses.grid)}>
-            {Array.from({ length: fetchdataMeetingCardLendgth }).map(
+        <div className={twMerge(MainLayoutClassesStyles.padding)}>
+          <div className={twMerge(MainLayoutClassesStyles.grid)}>
+            {Array.from({ length: FETCH_DATA_PROJECT_CARD_LENGTH }).map(
               (_, index) => (
                 <MeetingCard
                   key={`meeting-id-${index}`}

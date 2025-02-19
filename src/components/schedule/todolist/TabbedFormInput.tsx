@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { SidebarClasses } from "@/utils/styles/globalStyeld";
+import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import SelectWrapper from "../../ui/select/SelectWrapper";
 
 interface TabbedFormInputProps {
@@ -89,9 +89,9 @@ export default function TabbedFormInput({
               value={form.title}
               onChange={onChange}
               className={twMerge(
-                SidebarClasses.inputClasses,
-                SidebarClasses.listClasses,
-                SidebarClasses.inputFocus
+                SidebarClassesStyles.inputClasses,
+                SidebarClassesStyles.listClasses,
+                SidebarClassesStyles.inputFocus
               )}
             />
           )}
@@ -105,9 +105,9 @@ export default function TabbedFormInput({
                   "w-full appearance-none px-4 py-2 pr-10 text-gray-700",
                   "transition-all duration-200 ease-in-out",
                   "hover:border-gray-400",
-                  SidebarClasses.inputClasses,
-                  SidebarClasses.listClasses,
-                  SidebarClasses.inputFocus
+                  SidebarClassesStyles.inputClasses,
+                  SidebarClassesStyles.listClasses,
+                  SidebarClassesStyles.inputFocus
                 )}
               >
                 <option value="">태그를 선택하세요</option>
@@ -126,9 +126,9 @@ export default function TabbedFormInput({
                   "w-full appearance-none px-4 py-2 pr-10 text-gray-700",
                   "transition-all duration-200 ease-in-out",
                   "hover:border-gray-400",
-                  SidebarClasses.inputClasses,
-                  SidebarClasses.listClasses,
-                  SidebarClasses.inputFocus
+                  SidebarClassesStyles.inputClasses,
+                  SidebarClassesStyles.listClasses,
+                  SidebarClassesStyles.inputFocus
                 )}
               >
                 <option value="">우선순위를 선택하세요</option>

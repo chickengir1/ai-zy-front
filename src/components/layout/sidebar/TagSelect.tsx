@@ -1,4 +1,4 @@
-import { SidebarClasses } from "@/utils/styles/globalStyeld";
+import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import SelectWrapper from "@/components/ui/select/SelectWrapper";
 
@@ -19,16 +19,16 @@ export default function TagSelect({
 
   return (
     <div>
-      <p className={twMerge(SidebarClasses.titleClasses)}>태그</p>
+      <p className={twMerge(SidebarClassesStyles.titleClasses)}>태그</p>
       <SelectWrapper>
         <select
           className={twMerge(
             "w-full appearance-none px-4 py-2 pr-10 text-gray-700",
             "transition-all duration-200 ease-in-out",
             "hover:border-gray-400",
-            SidebarClasses.inputClasses,
-            SidebarClasses.listClasses,
-            SidebarClasses.inputFocus
+            SidebarClassesStyles.inputClasses,
+            SidebarClassesStyles.listClasses,
+            SidebarClassesStyles.inputFocus
           )}
           value={selectedTag}
           onChange={handleTagChange}

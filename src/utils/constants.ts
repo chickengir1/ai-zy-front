@@ -1,5 +1,11 @@
 export const MIN_WIDTH = 320;
 
+export const MAX_PARTICIPANT_ICONS = 3;
+
+export const FETCH_DATA_PROJECT_CARD_LENGTH = 2;
+
+export const FETCH_DATA_MEETING_CARD_LENGTH = 5;
+
 export const content = `
 ## 프로젝트 A 킥오프 미팅
 ### 📅 회의 정보

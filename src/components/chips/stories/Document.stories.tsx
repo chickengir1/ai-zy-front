@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Document from "@/components/chips/proceedings/document/Document";
+import Document from "@/components/chips/proceedings/Document";
 import { content } from "@/utils/constants";
 
 const meta: Meta<typeof Document> = {
