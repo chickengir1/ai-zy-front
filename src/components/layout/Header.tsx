@@ -3,7 +3,7 @@ import { useMatch } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { HeaderClasses } from "@/utils/styles/globalStyeld";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { useNavigation } from "@/hooks/ui/useNavigation";
+import { useNavigation } from "@/hooks/utility/useNavigation";
 
 interface HeaderProps {
   title: string;

@@ -7,8 +7,8 @@ import CreationItem from "@/components/chips/CreationItem";
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import SearchInput from "@/components/ui/search/SearchInput";
 import ChatInterface from "@/components/chatInterface/ChatInterface";
-import { useKeyPress } from "@/hooks/utils/chatInterface/useKeyPress";
-import { useToggle } from "@/hooks/ui/useToggle";
+import { useKeyPress } from "@/hooks/ui/chatInterface/useKeyPress";
+import { useToggle } from "@/hooks/utility/useToggle";
 
 // TODO : 한페이지엔 최대 7개의 프로젝트만 보여줄것, 페이지네이션 버튼 구현
 const fetchdataProjectCardLength = 2;

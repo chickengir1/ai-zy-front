@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+// TODO : 유틸로 분리
 const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

@@ -3,7 +3,7 @@ import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { getModeColors } from "@/utils/helpers/chatUtils";
 import { IoIosSend } from "react-icons/io";
-import { useToggle } from "@/hooks/ui/useToggle";
+import { useToggle } from "@/hooks/utility/useToggle";
 
 interface ChatInterfaceProps {
   onClose: () => void;

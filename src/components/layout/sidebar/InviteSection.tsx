@@ -1,5 +1,5 @@
 import InvitedList from "./InvitedList";
-import { useEmailValidation } from "@/hooks/utils/sidebar/useEmailValidation";
+import { useEmailValidation } from "@/hooks/ui/sidebar/useEmailValidation";
 import { SidebarClasses } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import { toast } from "react-toastify";

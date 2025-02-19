@@ -21,6 +21,7 @@ export function getModeColors(isCommandMode: boolean): ModeColors {
       };
 }
 
+// NOTE: role 관련 로직 수정 해야함
 export function getMessageStyle(role: "user" | "bot", isCommandMode: boolean) {
   if (role === "user") {
     return "bg-indigo-600 text-white";

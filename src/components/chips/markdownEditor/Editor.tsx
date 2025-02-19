@@ -10,8 +10,8 @@ import {
   SidebarClasses,
 } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-import { useToggle } from "@/hooks/ui/useToggle";
-import { useNavigation } from "@/hooks/ui/useNavigation";
+import { useToggle } from "@/hooks/utility/useToggle";
+import { useNavigation } from "@/hooks/utility/useNavigation";
 
 interface Document {
   title: string;
