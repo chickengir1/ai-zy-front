@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import TodoList from "@/components/schedule/todolist/Todolist";
 
 const meta: Meta<typeof TodoList> = {
-  title: "ui/Todolist",
+  title: "schedule/Todolist",
   component: TodoList,
   tags: ["autodocs"],
 };
