@@ -19,7 +19,11 @@ type Story = StoryObj<typeof ChatInterface>;
 export const Default: Story = {
   render: () => (
     <div className="relative h-screen">
-      <ChatInterface onClose={() => {}} />
+      <ChatInterface
+        onClose={() => {
+          alert("닫기 버튼 클릭");
+        }}
+      />
     </div>
   ),
 };

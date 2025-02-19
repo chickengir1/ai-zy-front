@@ -5,9 +5,9 @@ import { showSuccessToast, showErrorToast } from "@/utils/helpers/toastUtils";
 import { MdCancel } from "react-icons/md";
 import Modal from "@/components/portal/modal/Modal";
 import {
-  DocumentClasses,
-  UnitClasses,
-  SidebarClasses,
+  DocumentClassesStyles,
+  UnitClassesStyles,
+  SidebarClassesStyles,
 } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import { useToggle } from "@/hooks/utility/useToggle";
@@ -88,7 +88,7 @@ export default function MarkdownEditor() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={twMerge(DocumentClasses.container)}>
+      <div className={twMerge(DocumentClassesStyles.container)}>
         <div>
           <div className="flex items-center justify-between">
             <p className="mb-3 text-lg font-semibold text-gray-800">
@@ -103,9 +103,9 @@ export default function MarkdownEditor() {
             type="text"
             placeholder="회의록 제목 작성"
             className={twMerge(
-              SidebarClasses.inputClasses,
-              SidebarClasses.inputFocus,
-              SidebarClasses.listClasses
+              SidebarClassesStyles.inputClasses,
+              SidebarClassesStyles.inputFocus,
+              SidebarClassesStyles.listClasses
             )}
             value={document.title}
             onChange={handleTitleChange}
@@ -130,7 +130,7 @@ export default function MarkdownEditor() {
             />
           </div>
         </div>
-        <button type="submit" className={twMerge(UnitClasses.button)}>
+        <button type="submit" className={twMerge(UnitClassesStyles.button)}>
           제출하기
         </button>
         <Toastify

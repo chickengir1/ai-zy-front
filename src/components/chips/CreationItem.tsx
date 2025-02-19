@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { IoPushOutline } from "react-icons/io5";
 import { twMerge } from "tailwind-merge";
-import { BaseClasses, SizeClasses } from "@/utils/styles/globalStyeld";
+import {
+  BaseClassesStyles,
+  SizeClassesStyles,
+} from "@/utils/styles/globalStyeld";
 
 interface CreationFormProps {
   path?: string;
@@ -13,44 +16,60 @@ export default function CreationItem({ path, onClick }: CreationFormProps) {
     <div
       className={twMerge(
         "flex flex-col items-center justify-center bg-white",
-        BaseClasses.container
+        BaseClassesStyles.container
       )}
     >
       {path ? (
         <Link
           to={path}
-          className={twMerge(BaseClasses.linkButton, SizeClasses.linkButton)}
+          className={twMerge(
+            BaseClassesStyles.linkButton,
+            SizeClassesStyles.linkButton
+          )}
         >
           <div
             className={twMerge(
-              BaseClasses.iconContainer,
-              SizeClasses.iconContainer
+              BaseClassesStyles.iconContainer,
+              SizeClassesStyles.iconContainer
             )}
           >
             <IoPushOutline
-              className={twMerge(BaseClasses.icon, SizeClasses.icon)}
+              className={twMerge(
+                BaseClassesStyles.icon,
+                SizeClassesStyles.icon
+              )}
             />
           </div>
-          <span className={twMerge(BaseClasses.text, SizeClasses.text)}>
+          <span
+            className={twMerge(BaseClassesStyles.text, SizeClassesStyles.text)}
+          >
             새 작업
           </span>
         </Link>
       ) : (
         <button
-          className={twMerge(BaseClasses.linkButton, SizeClasses.linkButton)}
+          className={twMerge(
+            BaseClassesStyles.linkButton,
+            SizeClassesStyles.linkButton
+          )}
           onClick={onClick}
         >
           <div
             className={twMerge(
-              BaseClasses.iconContainer,
-              SizeClasses.iconContainer
+              BaseClassesStyles.iconContainer,
+              SizeClassesStyles.iconContainer
             )}
           >
             <IoPushOutline
-              className={twMerge(BaseClasses.icon, SizeClasses.icon)}
+              className={twMerge(
+                BaseClassesStyles.icon,
+                SizeClassesStyles.icon
+              )}
             />
           </div>
-          <span className={twMerge(BaseClasses.text, SizeClasses.text)}>
+          <span
+            className={twMerge(BaseClassesStyles.text, SizeClassesStyles.text)}
+          >
             새 작업
           </span>
         </button>

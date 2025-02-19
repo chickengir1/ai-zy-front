@@ -1,5 +1,8 @@
 import { twMerge } from "tailwind-merge";
-import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
+import {
+  MainLayoutClassesStyles,
+  UnitClassesStyles,
+} from "@/utils/styles/globalStyeld";
 import Header from "@/components/layout/Header";
 import ToggleNav from "@/components/layout/toggleNav";
 import SearchInput from "@/components/ui/search/SearchInput";
@@ -8,13 +11,13 @@ import TodoList from "@/components/schedule/todolist/Todolist";
 export default function TodolistPage() {
   return (
     <div>
-      <div className={twMerge(UnitClasses.header)}>
+      <div className={twMerge(UnitClassesStyles.header)}>
         <Header title="투두리스트 페이지" />
       </div>
 
       <div
         className={twMerge(
-          MainLayoutClasses.headerNavPadding,
+          MainLayoutClassesStyles.headerNavPadding,
           "justify-between"
         )}
       >
@@ -27,7 +30,7 @@ export default function TodolistPage() {
           onChange={() => {}}
         />
       </div>
-      <div className={twMerge(MainLayoutClasses.padding)}>
+      <div className={twMerge(MainLayoutClassesStyles.padding)}>
         <TodoList />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { SidebarClasses } from "@/utils/styles/globalStyeld";
+import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 
 interface ProjectFormProps {
@@ -28,28 +28,32 @@ export default function ProjectForm({
   return (
     <div>
       <div className="mb-4">
-        <p className={twMerge(SidebarClasses.titleClasses)}>프로젝트 이름</p>
+        <p className={twMerge(SidebarClassesStyles.titleClasses)}>
+          프로젝트 이름
+        </p>
         <input
           autoFocus
           type="text"
           placeholder="프로젝트 이름을 입력하세요"
           className={twMerge(
-            SidebarClasses.inputClasses,
-            SidebarClasses.inputFocus,
-            SidebarClasses.listClasses
+            SidebarClassesStyles.inputClasses,
+            SidebarClassesStyles.inputFocus,
+            SidebarClassesStyles.listClasses
           )}
           value={projectName}
           onChange={handleProjectNameChange}
         />
       </div>
       <div>
-        <p className={twMerge(SidebarClasses.titleClasses)}>프로젝트 설명</p>
+        <p className={twMerge(SidebarClassesStyles.titleClasses)}>
+          프로젝트 설명
+        </p>
         <textarea
           placeholder="프로젝트 설명을 입력하세요"
           className={twMerge(
-            SidebarClasses.inputClasses,
-            SidebarClasses.inputFocus,
-            SidebarClasses.listClasses,
+            SidebarClassesStyles.inputClasses,
+            SidebarClassesStyles.inputFocus,
+            SidebarClassesStyles.listClasses,
             "h-24 resize-none"
           )}
           value={projectDescription}

@@ -1,4 +1,7 @@
-import { MainLayoutClasses, UnitClasses } from "@/utils/styles/globalStyeld";
+import {
+  MainLayoutClassesStyles,
+  UnitClassesStyles,
+} from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import { HiChatAlt } from "react-icons/hi";
 import Header from "@/components/layout/Header";
@@ -9,9 +12,9 @@ import SearchInput from "@/components/ui/search/SearchInput";
 import ChatInterface from "@/components/chatInterface/ChatInterface";
 import { useKeyPress } from "@/hooks/ui/chatInterface/useKeyPress";
 import { useToggle } from "@/hooks/utility/useToggle";
+import { FETCH_DATA_PROJECT_CARD_LENGTH } from "@/utils/constants";
 
 // TODO : 한페이지엔 최대 7개의 프로젝트만 보여줄것, 페이지네이션 버튼 구현
-const fetchdataProjectCardLength = 2;
 
 export default function ProjectsPage() {
   const [isSidebarOpen, toggleSidebar] = useToggle(false);
@@ -33,12 +36,12 @@ export default function ProjectsPage() {
 
   return (
     <div>
-      <div className={twMerge(UnitClasses.header)}>
+      <div className={twMerge(UnitClassesStyles.header)}>
         <Header title="Ai-Zy 루트페이지" />
       </div>
       <div
         className={twMerge(
-          MainLayoutClasses.headerNavPadding,
+          MainLayoutClassesStyles.headerNavPadding,
           "justify-center"
         )}
       >
@@ -48,9 +51,9 @@ export default function ProjectsPage() {
           onChange={() => {}}
         />
       </div>
-      <div className={twMerge(MainLayoutClasses.padding)}>
-        <div className={twMerge(MainLayoutClasses.grid)}>
-          {Array.from({ length: fetchdataProjectCardLength }).map(
+      <div className={twMerge(MainLayoutClassesStyles.padding)}>
+        <div className={twMerge(MainLayoutClassesStyles.grid)}>
+          {Array.from({ length: FETCH_DATA_PROJECT_CARD_LENGTH }).map(
             (_, index) => (
               <ProjectCard
                 key={`project-id-${index}`}

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import DocumentHeader from "@/components/chips/proceedings/document/DocumentHeader";
+import DocumentHeader from "@/components/chips/proceedings/DocumentHeader";
 
 const meta: Meta<typeof DocumentHeader> = {
   title: "document/DocumentHeader",
