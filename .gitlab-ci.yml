@@ -10,7 +10,6 @@ build:
   stage: build
   image: node:lts
   script:
-    - ls -l src/utils/styles/
     - npm install
     - npm run build
   artifacts:
@@ -24,12 +23,12 @@ deploy:
   image: alpine
   before_script:
     - mkdir -p ~/.ssh
+    - apk add --no-cache openssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - touch ~/.ssh/known_hosts
     - ssh-keyscan 34.22.99.12 >> ~/.ssh/known_hosts
   script:
-    - apk add rsync openssh
-    - rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./dist/ kdt@34.22.99.12:/var/www/html/
+    - apk add --no-cache rsync openssh
   only:
     - test/deploy
