@@ -16,7 +16,7 @@ build:
     paths:
       - dist/
   only:
-    - dev
+    - test/deploy
 
 deploy:
   stage: deploy
@@ -31,4 +31,4 @@ deploy:
     - apk add rsync openssh
     - rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./dist/ kdt@34.22.99.12:/var/www/html/
   only:
-    - dev
+    - test/deploy
