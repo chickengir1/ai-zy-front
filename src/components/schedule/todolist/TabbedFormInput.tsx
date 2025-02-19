@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { SidebarClasses } from "@/utils/styles/globalStyeld";
-import SelectWrapper from "../ui/select/SelectWrapper";
+import SelectWrapper from "../../ui/select/SelectWrapper";
 
 interface TabbedFormInputProps {
   form: { title: string; tag: string; priority: string };
