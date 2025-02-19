@@ -12,7 +12,7 @@ build:
   script:
     - npm install
     - npm run build
-    - npm run chromatic -- --branch main
+    - npm run chromatic -- --branch dev
   artifacts:
     paths:
       - dist/
