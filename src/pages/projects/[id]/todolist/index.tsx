@@ -3,8 +3,8 @@ import {
   MainLayoutClassesStyles,
   UnitClassesStyles,
 } from "@/utils/styles/globalStyeld";
-import Header from "@/components/layout/Header";
-import ToggleNav from "@/components/layout/toggleNav";
+import Header from "@/components/layout/header/Header";
+import ToggleNav from "@/components/layout/toggle/toggleNav";
 import SearchInput from "@/components/ui/search/SearchInput";
 import TodoList from "@/components/schedule/todolist/Todolist";
 

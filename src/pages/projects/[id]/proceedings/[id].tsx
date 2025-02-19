@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Header from "@/components/layout/header/Header";
 import Document from "@/components/chips/proceedings/Document";
 import { content } from "@/utils/constants";
 import { useParams } from "react-router-dom";

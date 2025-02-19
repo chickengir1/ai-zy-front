@@ -4,10 +4,10 @@ import {
   UnitClassesStyles,
 } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-import Header from "@/components/layout/Header";
+import Header from "@/components/layout/header/Header";
 import MeetingCard from "@/components/chips/proceedings/MeetingCard";
 import CreationItem from "@/components/chips/CreationItem";
-import ToggleNav from "@/components/layout/toggleNav";
+import ToggleNav from "@/components/layout/toggle/toggleNav";
 import SearchInput from "@/components/ui/search/SearchInput";
 import { FETCH_DATA_PROJECT_CARD_LENGTH } from "@/utils/constants";
 

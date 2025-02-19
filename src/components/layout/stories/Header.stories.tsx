@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Header from "@/components/layout/Header";
+import Header from "@/components/layout/header/Header";
 import { MemoryRouter } from "react-router-dom";
 
 const meta: Meta<typeof Header> = {

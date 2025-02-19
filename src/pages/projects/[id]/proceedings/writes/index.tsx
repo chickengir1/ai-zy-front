@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Header from "@/components/layout/header/Header";
 import MarkdownEditor from "@/components/chips/markdownEditor/Editor";
 import {
   DocumentClassesStyles,

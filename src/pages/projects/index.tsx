@@ -4,7 +4,7 @@ import {
 } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 import { HiChatAlt } from "react-icons/hi";
-import Header from "@/components/layout/Header";
+import Header from "@/components/layout/header/Header";
 import ProjectCard from "@/components/chips/projects/ProjectCard";
 import CreationItem from "@/components/chips/CreationItem";
 import Sidebar from "@/components/layout/sidebar/Sidebar";

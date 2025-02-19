@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import ToggleNav from "@/components/layout/toggleNav";
+import ToggleNav from "@/components/layout/toggle/toggleNav";
 import { MemoryRouter } from "react-router-dom";
 
 const meta: Meta<typeof ToggleNav> = {
