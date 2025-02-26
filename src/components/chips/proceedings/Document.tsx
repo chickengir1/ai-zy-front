@@ -1,32 +1,26 @@
-import DocumentHeader, { MeetingHeaderProps } from "./DocumentHeader";
+import DocumentHeader from "@/components/chips/proceedings/DocumentHeader";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { DocumentClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
+import { useDocumentData } from "@/hooks/api/proceedings/useDocumentData";
 
-interface DocumentProps extends MeetingHeaderProps {
-  content: string;
-}
+export default function Document() {
+  const { documentData, handler } = useDocumentData();
+  const { title, contents, attendeeNames, createdAt } = documentData;
+  const { handleSettingOpen } = handler;
 
-export default function Document({
-  title,
-  date,
-  participantCount,
-  participantNames,
-  content,
-  onClickSetting,
-}: DocumentProps) {
   return (
     <div className={twMerge(DocumentClassesStyles.container)}>
       <DocumentHeader
         title={title}
-        date={date}
-        participantCount={participantCount}
-        participantNames={participantNames}
-        onClickSetting={onClickSetting}
+        date={createdAt}
+        participantCount={attendeeNames.length}
+        participantNames={attendeeNames}
+        onClickSetting={handleSettingOpen}
       />
       <ReactMarkdown className="prose max-w-none" remarkPlugins={[remarkGfm]}>
-        {content}
+        {contents}
       </ReactMarkdown>
     </div>
   );

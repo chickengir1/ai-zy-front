@@ -1,20 +1,10 @@
 import { FaTrash } from "react-icons/fa";
-import { Todo } from "./Todolist";
+import { getPriorityClassName } from "@/utils/helpers/todolistHelpers";
+import { useTodolist } from "@/hooks/ui/todolist/useTodolist";
 
-interface TodoItemProps {
-  todo: Todo;
-  onDelete: (id: number) => void;
-  getPriorityClassName: (priority: string) => string;
-}
-
-export default function TodoItem({
-  todo,
-  onDelete,
-  getPriorityClassName,
-}: TodoItemProps) {
-  function handleDelete() {
-    onDelete(todo.id);
-  }
+export default function TodoItem({ todo }: { todo: Todo.Todo }) {
+  const { handler } = useTodolist();
+  const { handleDeleteTodo } = handler;
 
   return (
     <div className="flex w-full items-center justify-between rounded-lg border bg-white p-3">
@@ -35,7 +25,7 @@ export default function TodoItem({
           {todo.priority}
         </span>
         <button
-          onClick={handleDelete}
+          onClick={handleDeleteTodo(todo.id)}
           className="text-red-500 hover:text-red-600"
         >
           <FaTrash size={16} />

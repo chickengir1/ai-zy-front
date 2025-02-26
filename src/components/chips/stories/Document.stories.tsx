@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Document from "@/components/chips/proceedings/Document";
-import { content } from "@/utils/constants";
 
 const meta: Meta<typeof Document> = {
   title: "document/Document",
@@ -14,7 +13,7 @@ const meta: Meta<typeof Document> = {
     onClickSetting: () => {
       alert("설정 버튼 클릭");
     },
-    content: content,
+    content: "프로젝트 A 킥오프 미팅",
   },
 };
 
@@ -24,6 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    content: content,
+    content: "프로젝트 A 킥오프 미팅",
   },
 };

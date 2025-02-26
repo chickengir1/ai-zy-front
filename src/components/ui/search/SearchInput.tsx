@@ -12,7 +12,7 @@ export default function SearchInput({
   placeholder,
 }: SearchInputProps) {
   return (
-    <div className="relative w-full max-w-sm py-4">
+    <div className="relative w-full max-w-[225px] sm:max-w-[250px] md:max-w-[300px] md:py-4 lg:max-w-[400px]">
       <input
         type="text"
         placeholder={placeholder}

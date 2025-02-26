@@ -7,10 +7,7 @@ interface PieChartsProps {
 }
 
 export default function PieCharts({ labels, data }: PieChartsProps) {
-  const { getChartOptions, getChartData } = usePieChart();
-  const chartData = getChartData(labels, data);
-
-  const hasData = data.some((value: number) => value > 0);
+  const { getChartOptions, chartData, hasData } = usePieChart(labels, data);
 
   return (
     <div className="w-full rounded-xl bg-white p-6 shadow-md">

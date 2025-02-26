@@ -6,13 +6,7 @@ import {
   Plugin,
   Chart,
 } from "chart.js";
-import {
-  chartColors,
-  chartOptions,
-  chartPlugins,
-  chartTooltip,
-  chartElements,
-} from "@/utils/helpers/chartConfig";
+import { DEFAULT_CHART_CONFIG } from "@/utils/helpers/chartConfig";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -51,24 +45,24 @@ const centerTextPlugin: Plugin<"pie"> = {
 
 ChartJS.register(centerTextPlugin);
 
-export function usePieChart() {
+export function usePieChart(labels: string[], data: number[]) {
   function getChartColors() {
     return {
-      ...chartColors,
+      ...DEFAULT_CHART_CONFIG.chartColors,
     };
   }
 
   function getChartOptions() {
     return {
-      ...chartOptions,
+      ...DEFAULT_CHART_CONFIG.chartOptions,
       plugins: {
-        ...chartPlugins,
+        ...DEFAULT_CHART_CONFIG.chartPlugins,
         tooltip: {
-          ...chartTooltip,
+          ...DEFAULT_CHART_CONFIG.chartTooltip,
         },
       },
       elements: {
-        ...chartElements,
+        ...DEFAULT_CHART_CONFIG.chartElements,
       },
     };
   }
@@ -87,6 +81,9 @@ export function usePieChart() {
       ],
     };
   }
+  const chartData = getChartData(labels, data);
 
-  return { getChartOptions, getChartColors, getChartData };
+  const hasData = data.some((value: number) => value > 0);
+
+  return { getChartOptions, chartData, hasData };
 }

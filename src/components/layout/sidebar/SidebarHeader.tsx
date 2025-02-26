@@ -1,8 +1,4 @@
-interface SidebarHeaderProps {
-  onClose: () => void;
-}
-
-export default function SidebarHeader({ onClose }: SidebarHeaderProps) {
+export default function SidebarHeader({ onClose }: Sidebar.SidebarProps) {
   return (
     <>
       <div className="flex items-center justify-between border-b p-4">

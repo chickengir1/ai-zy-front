@@ -3,6 +3,13 @@ interface FieldStyles {
   input?: string;
 }
 
+interface ValidationOptions {
+  validator: (value: string) => boolean;
+  errorMessage: string;
+  validStyles: FieldStyles;
+  invalidStyles: FieldStyles;
+}
+
 export interface FieldValidation {
   isValid: boolean;
   hasInput: boolean;
@@ -11,17 +18,10 @@ export interface FieldValidation {
   styles: FieldStyles;
 }
 
-interface ValidationOptions {
-  validator: (value: string) => boolean;
-  errorMessage: string;
-  validStyles: FieldStyles;
-  invalidStyles: FieldStyles;
-}
-
-export const validateField = (
+export function validateField(
   value: string,
   { validator, errorMessage, validStyles, invalidStyles }: ValidationOptions
-): FieldValidation => {
+): FieldValidation {
   const isValid = validator(value);
   const hasInput = value.trim() !== "";
   const showError = hasInput && !isValid;
@@ -33,9 +33,17 @@ export const validateField = (
     errorMessage: showError ? errorMessage : "",
     styles: isValid ? validStyles : invalidStyles,
   };
-};
+}
 
-export const validateEmail = (email: string): boolean => {
+export function validateEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
-};
+}
+
+export function itemList<T extends { display: string }>(items: T[]) {
+  return items.map((item) => ({
+    ...item,
+    searchTerm: item.display,
+    displayText: item.display,
+  }));
+}

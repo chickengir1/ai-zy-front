@@ -23,7 +23,7 @@ export default function ProjectCard({
   tag,
   gradientFrom,
   gradientTo,
-  linkTo = "/",
+  linkTo,
 }: ProjectCardProps) {
   return (
     <Link to={linkTo}>

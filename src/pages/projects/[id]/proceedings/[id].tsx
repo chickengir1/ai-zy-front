@@ -1,21 +1,27 @@
 import Header from "@/components/layout/header/Header";
 import Document from "@/components/chips/proceedings/Document";
-import { content } from "@/utils/constants";
-import { useParams } from "react-router-dom";
 import {
   DocumentClassesStyles,
+  ToolClassesStyles,
   UnitClassesStyles,
 } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-import { useNavigation } from "@/hooks/utility/useNavigation";
+import ErrorFallback from "@/components/errorBoundary/ErrorFallback";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import LoadingPulse from "@/components/ui/loading/Pulse";
+import { useToggle } from "@/hooks/utility/useToggle";
+import SettingModal from "@/components/portal/modal/SettingModal";
+import { RiSettings5Fill } from "react-icons/ri";
+import DeleteDocumentModal from "@/components/chips/proceedings/DeleteDocumentModal";
+import { documentParams } from "@/utils/helpers/sharedHelpers";
 
-// TODO : Content가 없을때 예외 처리
 export default function DocDetailPage() {
-  const { id } = useParams();
-  const { goTo } = useNavigation();
+  const [isOpen, toggle] = useToggle(false);
+  const { projectId, documentId } = documentParams();
 
   function handleSettingOpen() {
-    goTo(`/projects/${id}/proceedings/writes`);
+    toggle();
   }
 
   return (
@@ -23,16 +29,26 @@ export default function DocDetailPage() {
       <div className={twMerge(UnitClassesStyles.header)}>
         <Header title="프로젝트 문서 상세 페이지" />
       </div>
-      <div className={twMerge(DocumentClassesStyles.layoutClasses)}>
-        <Document
-          title="프로젝트 A 킥오프 미팅"
-          date="2025-02-12"
-          participantCount={10}
-          participantNames={["김철수", "이영희", "박영수", "최영미", "정영희"]}
-          content={content}
-          onClickSetting={handleSettingOpen}
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<LoadingPulse />}>
+          <div className={twMerge(DocumentClassesStyles.layoutClasses)}>
+            <Document />
+          </div>
+        </Suspense>
+      </ErrorBoundary>
+      <button
+        onClick={handleSettingOpen}
+        className={twMerge(ToolClassesStyles.base, ToolClassesStyles.chat)}
+      >
+        <RiSettings5Fill className={ToolClassesStyles.icon} />
+      </button>
+      <SettingModal isOpen={isOpen} onClose={handleSettingOpen}>
+        <DeleteDocumentModal
+          onClose={handleSettingOpen}
+          projectId={projectId}
+          documentId={documentId}
         />
-      </div>
+      </SettingModal>
     </div>
   );
 }

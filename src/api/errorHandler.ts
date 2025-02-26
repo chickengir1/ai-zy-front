@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/AuthStore";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 // TODO: 로그아웃 처리 해야함
@@ -40,15 +41,18 @@ export function handleAuthIfNeeded(apiError: ApiError): void {
 }
 
 function handleAuthError(error: ApiError) {
+  const { setAccessToken, setRefreshToken } = useAuthStore.getState();
   if (error.status === 401) {
     console.error("인증이 만료되었습니다. 다시 로그인해주세요.");
-    // authStore.getState().logout();
+    setAccessToken("");
+    setRefreshToken("");
   } else if (error.status === 403) {
     console.error("접근 권한이 없습니다.");
   }
 }
 
 function handleAxiosError(error: AxiosError<ErrorResponse>): ApiError {
+  console.error(error);
   return {
     code: error.response?.data?.code || "UNKNOWN_ERROR",
     message: error.response?.data?.message || error.message,

@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { setupInterceptors } from "./interceptors";
-import { ApiError } from "./errorHandler";
+import { setupInterceptors } from "@/api/interceptors";
+import { ApiError } from "@/api/errorHandler";
 
 export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   url: string;
@@ -9,9 +9,11 @@ export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
 }
 
 export interface ApiResponse<T> {
-  data: T;
-  status: number;
-  statusText: string;
+  result: {
+    data: T;
+    status: number;
+    statusText: string;
+  };
   meta?: {
     page?: number;
     limit?: number;
@@ -25,7 +27,6 @@ export const axiosInstance: AxiosInstance = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
-  timeout: 5000,
 });
 
 setupInterceptors(axiosInstance);
@@ -33,7 +34,7 @@ setupInterceptors(axiosInstance);
 export const apiClient = {
   get: <T>(config: RequestConfig) =>
     axiosInstance
-      .get<ApiResponse<T>>(config.url, config)
+      .get<T>(config.url, config)
       .then((res) => res.data)
       .catch((error) => {
         throw error as ApiError;
@@ -41,7 +42,7 @@ export const apiClient = {
 
   post: <T>(config: RequestConfig) =>
     axiosInstance
-      .post<ApiResponse<T>>(config.url, config.data, config)
+      .post<T>(config.url, config.data, config)
       .then((res) => res.data)
       .catch((error) => {
         throw error as ApiError;
@@ -49,7 +50,7 @@ export const apiClient = {
 
   put: <T>(config: RequestConfig) =>
     axiosInstance
-      .put<ApiResponse<T>>(config.url, config.data, config)
+      .put<T>(config.url, config.data, config)
       .then((res) => res.data)
       .catch((error) => {
         throw error as ApiError;
@@ -57,7 +58,7 @@ export const apiClient = {
 
   patch: <T>(config: RequestConfig) =>
     axiosInstance
-      .patch<ApiResponse<T>>(config.url, config.data, config)
+      .patch<T>(config.url, config.data, config)
       .then((res) => res.data)
       .catch((error) => {
         throw error as ApiError;
@@ -65,7 +66,7 @@ export const apiClient = {
 
   delete: <T>(config: RequestConfig) =>
     axiosInstance
-      .delete<ApiResponse<T>>(config.url, config)
+      .delete<T>(config.url, config)
       .then((res) => res.data)
       .catch((error) => {
         throw error as ApiError;

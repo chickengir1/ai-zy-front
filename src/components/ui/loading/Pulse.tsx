@@ -5,7 +5,7 @@ export default function LoadingPulse() {
         {[...Array(3)].map((_, index) => (
           <div
             key={index}
-            className="animate-pulseAndMove h-4 w-4 rounded-full bg-indigo-500"
+            className="h-4 w-4 animate-pulseAndMove rounded-full bg-indigo-500"
             style={{ animationDelay: `${index * 0.2}s` }}
           ></div>
         ))}

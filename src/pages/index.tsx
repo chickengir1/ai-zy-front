@@ -1,9 +1,5 @@
-import Projects from "@/pages/projects";
+import { Navigate } from "react-router-dom";
 
 export default function HomePage() {
-  return (
-    <div>
-      <Projects />
-    </div>
-  );
+  return <Navigate to="/project" replace />;
 }
