@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
-import { IoPushOutline } from "react-icons/io5";
 import { twMerge } from "tailwind-merge";
-import {
-  BaseClassesStyles,
-  SizeClassesStyles,
-} from "@/utils/styles/globalStyeld";
+import { BaseClassesStyles } from "@/utils/styles/globalStyeld";
+import CreationPath from "./CreationPath";
+import CreationSidebar from "./CreationSidebar";
 
 interface CreationFormProps {
   path?: string;
@@ -20,59 +17,9 @@ export default function CreationItem({ path, onClick }: CreationFormProps) {
       )}
     >
       {path ? (
-        <Link
-          to={path}
-          className={twMerge(
-            BaseClassesStyles.linkButton,
-            SizeClassesStyles.linkButton
-          )}
-        >
-          <div
-            className={twMerge(
-              BaseClassesStyles.iconContainer,
-              SizeClassesStyles.iconContainer
-            )}
-          >
-            <IoPushOutline
-              className={twMerge(
-                BaseClassesStyles.icon,
-                SizeClassesStyles.icon
-              )}
-            />
-          </div>
-          <span
-            className={twMerge(BaseClassesStyles.text, SizeClassesStyles.text)}
-          >
-            새 작업
-          </span>
-        </Link>
+        <CreationPath path={path} />
       ) : (
-        <button
-          className={twMerge(
-            BaseClassesStyles.linkButton,
-            SizeClassesStyles.linkButton
-          )}
-          onClick={onClick}
-        >
-          <div
-            className={twMerge(
-              BaseClassesStyles.iconContainer,
-              SizeClassesStyles.iconContainer
-            )}
-          >
-            <IoPushOutline
-              className={twMerge(
-                BaseClassesStyles.icon,
-                SizeClassesStyles.icon
-              )}
-            />
-          </div>
-          <span
-            className={twMerge(BaseClassesStyles.text, SizeClassesStyles.text)}
-          >
-            새 작업
-          </span>
-        </button>
+        <CreationSidebar onClick={onClick} />
       )}
     </div>
   );

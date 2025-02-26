@@ -4,7 +4,9 @@ import {
   InternalAxiosRequestConfig,
   AxiosResponse,
 } from "axios";
-import { determineErrorType, handleAuthIfNeeded } from "./errorHandler";
+import { determineErrorType, handleAuthIfNeeded } from "@/api/errorHandler";
+import { useAuthStore } from "@/store/AuthStore";
+import { getFreshAccessToken } from "@/utils/helpers/authConfig";
 
 export function setupInterceptors(instance: AxiosInstance) {
   instance.interceptors.request.use(
@@ -17,16 +19,22 @@ export function setupInterceptors(instance: AxiosInstance) {
   );
 }
 
-export function requestInterceptor(
+export async function requestInterceptor(
   config: InternalAxiosRequestConfig
-): InternalAxiosRequestConfig {
-  // TODO: 요청 전 공통 처리
-  // 토큰 추가 예상 코드
-  // const token = getToken();
-  // if (token) {
-  //   config.headers = config.headers || {};
-  //   config.headers["Authorization"] = `Bearer ${token}`;
-  // }
+): Promise<InternalAxiosRequestConfig> {
+  let token = useAuthStore.getState().accessToken;
+
+  if (!token) {
+    try {
+      token = await getFreshAccessToken();
+      useAuthStore.getState().setAccessToken(token);
+    } catch (error) {
+      console.error(error);
+      throw new Error("토큰 재발급에 실패했습니다. 로그인이 필요합니다.");
+    }
+  }
+
+  config.headers.Authorization = `Bearer ${token}`;
   return config;
 }
 
@@ -39,9 +47,7 @@ export function requestErrorInterceptor(
 }
 
 export function responseInterceptor(response: AxiosResponse) {
-  const { data } = response;
-  console.log("데이터 반환 값", data);
-  return data;
+  return response;
 }
 
 export function responseErrorInterceptor(error: AxiosError) {

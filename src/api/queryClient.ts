@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { apiClient, ApiResponse } from "./apiClient";
+import { apiClient } from "./apiClient";
 
 interface QueryFnParams {
   queryKey: readonly unknown[];
@@ -7,10 +7,7 @@ interface QueryFnParams {
 }
 
 function createQueryFn<T>() {
-  return async ({
-    queryKey,
-    signal,
-  }: QueryFnParams): Promise<ApiResponse<T>> => {
+  return async ({ queryKey, signal }: QueryFnParams): Promise<T> => {
     const [endpoint, ...params] = queryKey;
     const url = typeof endpoint === "string" ? endpoint : "";
     const queryParams =
@@ -29,7 +26,7 @@ function createRetryFn() {
     if (error instanceof Error && "status" in error && error.status === 404) {
       return false;
     }
-    return failureCount < 3;
+    return failureCount < 1;
   };
 }
 

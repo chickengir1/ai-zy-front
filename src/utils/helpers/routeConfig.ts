@@ -11,6 +11,7 @@ interface Tab {
 
 export const HEADER_ROUTES: RouteConfig[] = [
   { path: "/", shouldShowHeader: true },
+  { path: "/project", shouldShowHeader: true },
   { path: "/projects", shouldShowHeader: true },
   { path: "/projects/:id", shouldShowHeader: true },
   { path: "/projects/:id/proceedings", shouldShowHeader: true },

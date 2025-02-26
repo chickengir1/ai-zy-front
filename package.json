@@ -13,6 +13,7 @@
     "chromatic": "npx chromatic --project-token=chpt_3a641548cdfc771 --auto-accept-changes"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.3.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "^5.66.0",
     "@tanstack/react-query-devtools": "^5.66.0",
@@ -26,7 +27,6 @@
     "react-error-boundary": "^5.0.0",
     "react-icons": "^5.4.0",
     "react-markdown": "^9.0.3",
-    "react-mentions": "^4.4.10",
     "react-toastify": "^11.0.3",
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.0.1",

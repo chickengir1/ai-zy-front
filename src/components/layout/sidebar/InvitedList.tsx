@@ -1,26 +1,22 @@
+import { useSidebarForm } from "@/hooks/ui/sidebar/useSidebarForm";
 import { FiUsers, FiX } from "react-icons/fi";
 
-interface InvitedListProps {
-  invitedTeamMembers: string[];
-  onRemoveMember: (email: string) => void;
-}
+export default function InvitedList({ onClose }: Sidebar.SidebarProps) {
+  const { formState, inviteHandlers } = useSidebarForm({
+    onClose,
+  });
+  const { sidebarFormData } = formState;
+  const { handleRemoveMember } = inviteHandlers;
 
-export default function InvitedList({
-  invitedTeamMembers,
-  onRemoveMember,
-}: InvitedListProps) {
-  if (invitedTeamMembers.length === 0) return null;
+  if (sidebarFormData.invitedTeamMembers.length === 0) return null;
 
-  function handleRemoveMember(email: string) {
-    return function (e: React.MouseEvent<HTMLButtonElement>) {
-      e.preventDefault();
-      onRemoveMember(email);
-    };
+  function handleRemoveInvitedMember(member: string) {
+    return () => handleRemoveMember(member);
   }
 
   return (
     <ul className="flex max-h-[130px] flex-col gap-2 overflow-y-auto md:grid md:grid-cols-2">
-      {invitedTeamMembers.map((member) => (
+      {sidebarFormData.invitedTeamMembers.map((member) => (
         <li
           key={member}
           className="flex items-center justify-between rounded-md border bg-white p-2"
@@ -32,7 +28,7 @@ export default function InvitedList({
           <button
             type="button"
             className="text-red-500 hover:text-red-600"
-            onClick={handleRemoveMember(member)}
+            onClick={handleRemoveInvitedMember(member)}
           >
             <FiX className="h-5 w-5" />
           </button>

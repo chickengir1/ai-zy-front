@@ -12,6 +12,14 @@ export default defineConfig({
       loadingComponent: "src/components/ui/loading/Pulse.tsx",
     }),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://kdt-pt-1-pj-2-team02.elicecoding.com:8080",
+        changeOrigin: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": "/src",

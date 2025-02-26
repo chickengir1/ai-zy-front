@@ -18,7 +18,8 @@ export const Default: Story = {
       alert("검색");
     },
     onChange: (e) => {
-      console.log(e.target.value);
+      const { value } = e.target;
+      console.log(value);
     },
   },
 };

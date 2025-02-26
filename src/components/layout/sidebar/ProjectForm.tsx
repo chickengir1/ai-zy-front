@@ -1,28 +1,18 @@
+import { useSidebarForm } from "@/hooks/ui/sidebar/useSidebarForm";
 import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
 
-interface ProjectFormProps {
-  projectName: string;
-  projectDescription: string;
-  setProjectName: (value: string) => void;
-  setProjectDescription: (value: string) => void;
-}
+export default function ProjectForm({ onClose }: Sidebar.SidebarProps) {
+  const { formState, handlers } = useSidebarForm({
+    onClose,
+  });
+  const { sidebarFormData } = formState;
+  const { handleFormChange } = handlers;
 
-export default function ProjectForm({
-  projectName,
-  projectDescription,
-  setProjectName,
-  setProjectDescription,
-}: ProjectFormProps) {
-  // NOTE : 이벤트 타입 나중에 한군데 모으기
-  function handleProjectNameChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setProjectName(e.target.value);
-  }
-
-  function handleProjectDescriptionChange(
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) {
-    setProjectDescription(e.target.value);
+  function handleChange(field: keyof Sidebar.SidebarFormProps) {
+    return (e: Event.FactoryEventType) => {
+      handleFormChange(field)(e.target.value);
+    };
   }
 
   return (
@@ -40,8 +30,8 @@ export default function ProjectForm({
             SidebarClassesStyles.inputFocus,
             SidebarClassesStyles.listClasses
           )}
-          value={projectName}
-          onChange={handleProjectNameChange}
+          value={sidebarFormData.title}
+          onChange={handleChange("title")}
         />
       </div>
       <div>
@@ -56,8 +46,8 @@ export default function ProjectForm({
             SidebarClassesStyles.listClasses,
             "h-24 resize-none"
           )}
-          value={projectDescription}
-          onChange={handleProjectDescriptionChange}
+          value={sidebarFormData.description}
+          onChange={handleChange("description")}
         />
       </div>
     </div>

@@ -2,7 +2,7 @@ import { HEADER_ROUTES } from "@/utils/helpers/routeConfig";
 import { useMatch } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { HeaderClassesStyles } from "@/utils/styles/globalStyeld";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { IoArrowBackOutline } from "react-icons/io5";
 import { useNavigation } from "@/hooks/utility/useNavigation";
 
 interface HeaderProps {
@@ -23,34 +23,40 @@ export default function Header({ title, className }: HeaderProps) {
     location.pathname === "/" || location.pathname === "/projects";
 
   function handleNavigation() {
-    if (shouldHideButton) {
-      return;
+    if (!shouldHideButton) {
+      goBack();
     }
-    goBack();
   }
 
   return (
     <header
       className={twMerge(
-        "flex w-full items-center justify-between bg-white px-2 py-4 shadow-md",
+        "flex w-full items-center justify-between bg-white px-4 py-4 shadow-md",
         HeaderClassesStyles.headerResponsive,
         className
       )}
     >
       <div className="flex w-full items-center justify-between">
         {shouldDisplayHeader() && (
-          <h1 className={HeaderClassesStyles.headerClasses}>{title}</h1>
+          <h1
+            className={twMerge(
+              HeaderClassesStyles.headerClasses,
+              "font-bold text-indigo-700"
+            )}
+          >
+            {title}
+          </h1>
         )}
         {!shouldHideButton && (
           <button
             onClick={handleNavigation}
-            className={twMerge(HeaderClassesStyles.backButton)}
+            className={HeaderClassesStyles.button}
           >
-            <IoArrowBackCircleOutline
-              size={24}
-              className={HeaderClassesStyles.backButtonIcon}
+            <IoArrowBackOutline
+              size={20}
+              className={HeaderClassesStyles.icon}
             />
-            <p className="text-base font-semibold">Back</p>
+            <span className={HeaderClassesStyles.text}>뒤로가기</span>
           </button>
         )}
       </div>

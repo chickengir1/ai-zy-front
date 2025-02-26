@@ -2,46 +2,16 @@ import InvitedList from "./InvitedList";
 import { useValidation } from "@/hooks/utility/useValidation";
 import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-import { toast } from "react-toastify";
-interface InviteSectionProps {
-  inviteEmail: string;
-  invitedTeamMembers: string[];
-  setInviteEmail: (value: string) => void;
-  getInvitedMembers: (members: string[]) => void;
-}
+import { useSidebarForm } from "@/hooks/ui/sidebar/useSidebarForm";
 
-// NOTE : useInviteSection 훅으로 분리
-export default function InviteSection({
-  inviteEmail,
-  invitedTeamMembers,
-  setInviteEmail,
-  getInvitedMembers,
-}: InviteSectionProps) {
+export default function InviteSection({ onClose }: Sidebar.SidebarProps) {
+  const { formState, inviteHandlers } = useSidebarForm({
+    onClose,
+  });
+  const { inviteEmail } = formState;
+  const { handleEmailChange, handleInvite } = inviteHandlers;
+
   const validation = useValidation({ email: inviteEmail });
-
-  function handleInvite() {
-    const trimmedEmail = inviteEmail.trim();
-
-    if (!trimmedEmail) {
-      return;
-    }
-
-    if (invitedTeamMembers.includes(trimmedEmail)) {
-      toast.error("이미 초대된 이메일입니다.");
-      return;
-    }
-
-    getInvitedMembers([...invitedTeamMembers, trimmedEmail]);
-    setInviteEmail("");
-  }
-
-  function handleRemoveMember(email: string) {
-    getInvitedMembers(invitedTeamMembers.filter((member) => member !== email));
-  }
-
-  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    setInviteEmail(e.target.value.trim());
-  }
 
   return (
     <div>
@@ -89,10 +59,7 @@ export default function InviteSection({
           "h-[150px] border-[#E4E4E7] bg-[#F9FAFB] p-2"
         )}
       >
-        <InvitedList
-          invitedTeamMembers={invitedTeamMembers}
-          onRemoveMember={handleRemoveMember}
-        />
+        <InvitedList onClose={onClose} />
       </div>
     </div>
   );
