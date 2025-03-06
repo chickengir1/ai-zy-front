@@ -1,4 +1,4 @@
-import { useNavigation } from "@/hooks/utility/useNavigation";
+import { useNavigation } from "@/hooks/utility/navigation/useNavigation";
 import Modal from "@/components/portal/modal/Modal";
 
 interface EditorModalProps {

@@ -1,5 +1,7 @@
 import { Pie } from "react-chartjs-2";
-import { usePieChart } from "@/hooks/ui/charts/useChart";
+import { usePieChart } from "@/hooks/business/charts/useChart";
+import PageNationButton from "@/components/ui/pagination/PaginationButton";
+import { useTodolistData } from "@/hooks/api/todolist/useTodolistData";
 
 interface PieChartsProps {
   labels: string[];
@@ -8,6 +10,8 @@ interface PieChartsProps {
 
 export default function PieCharts({ labels, data }: PieChartsProps) {
   const { getChartOptions, chartData, hasData } = usePieChart(labels, data);
+
+  const { content } = useTodolistData();
 
   return (
     <div className="w-full rounded-xl bg-white p-6 shadow-md">
@@ -28,6 +32,7 @@ export default function PieCharts({ labels, data }: PieChartsProps) {
           </div>
         )}
       </div>
+      <PageNationButton dataLength={content.length} />
     </div>
   );
 }

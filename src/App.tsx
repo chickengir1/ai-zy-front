@@ -1,19 +1,24 @@
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./api/queryClient";
 import RouteConfig from "vite-plugin-pages-router";
-import useWidthChecker from "./hooks/utility/useWidthChecker";
-import { ToastProvider } from "./providers/ToastProvider";
-import AuthProvider from "./providers/AuthProvider";
+import AuthProvider from "@/providers/auth/AuthProvider";
+import { ToastProvider } from "@/providers/toast/ToastProvider";
+import useWidthChecker from "@/hooks/utility/media/useWidthChecker";
+import { queryClient } from "@/api/queryClient";
 
 function App() {
   useWidthChecker();
+  const location = window.location.pathname;
 
   return (
     <ToastProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
+        {location === "/" ? (
           <RouteConfig />
-        </AuthProvider>
+        ) : (
+          <AuthProvider>
+            <RouteConfig />
+          </AuthProvider>
+        )}
       </QueryClientProvider>
     </ToastProvider>
   );

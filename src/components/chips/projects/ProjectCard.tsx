@@ -1,54 +1,46 @@
-import { twMerge } from "tailwind-merge";
-import { Link } from "react-router-dom";
 import ParticipantIcons from "./ParticipantIcons";
-import {
-  BaseClassesStyles,
-  SharedCardClassesStyles,
-} from "@/utils/styles/globalStyeld";
+import { FiFolder } from "react-icons/fi";
+import { ProjectCardStyles } from "@/utils/styles/global";
 
 interface ProjectCardProps {
   participantCount: number;
+  attendeeNames: string[];
   name: string;
   description: string;
   tag: string;
-  gradientFrom?: string;
-  gradientTo?: string;
-  linkTo: string;
 }
 
 export default function ProjectCard({
   participantCount,
+  attendeeNames,
   name,
   description,
   tag,
-  gradientFrom,
-  gradientTo,
-  linkTo,
 }: ProjectCardProps) {
   return (
-    <Link to={linkTo}>
-      <div
-        className={twMerge(
-          "flex flex-col justify-end bg-gradient-to-b",
-          BaseClassesStyles.container,
-          gradientFrom,
-          gradientTo
-        )}
-      >
-        <span className={twMerge(SharedCardClassesStyles.tag)}>{tag}</span>
-        <div className="flex flex-col gap-2 rounded-b-2xl border bg-[#f9f9f9] p-4">
-          <h2 className={twMerge(SharedCardClassesStyles.title)}>{name}</h2>
-          <p className={twMerge(SharedCardClassesStyles.description, "-mt-2")}>
-            {description}
-          </p>
-          <footer className={twMerge(SharedCardClassesStyles.footer)}>
-            <ParticipantIcons count={participantCount} />
-            <span className={twMerge(SharedCardClassesStyles.participantText)}>
-              {participantCount}명의 참가자
+    <div className={ProjectCardStyles.card}>
+      <div className={ProjectCardStyles.gradient} />
+      <div className={ProjectCardStyles.folderIcon}>
+        <FiFolder className={ProjectCardStyles.folderSvg} />
+      </div>
+      <div className={ProjectCardStyles.content}>
+        <div className={ProjectCardStyles.infoSection}>
+          <span className={ProjectCardStyles.tag}>{tag}</span>
+          <h2 className={ProjectCardStyles.title}>{name}</h2>
+          <p className={ProjectCardStyles.description}>{description}</p>
+        </div>
+        <div className={ProjectCardStyles.footer}>
+          <div className={ProjectCardStyles.participantInfo}>
+            <ParticipantIcons
+              count={participantCount}
+              attendeeNames={attendeeNames}
+            />
+            <span className={ProjectCardStyles.participantCount}>
+              {participantCount}명 참가
             </span>
-          </footer>
+          </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

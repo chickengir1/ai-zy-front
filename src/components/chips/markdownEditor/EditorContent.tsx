@@ -1,13 +1,13 @@
 import MDEditor from "@uiw/react-md-editor";
-import { useDocumentForm } from "@/hooks/ui/proceedings/useDocumentForm";
+import { useProceedingForm } from "@/hooks/business/proceedings/useProceedingForm";
+import { tag } from "@/utils/common/constans";
 import Select from "@/components/ui/select/Select";
 import SelectWrapper from "@/components/ui/select/SelectWrapper";
-import { tag } from "@/utils/constants";
 
 export default function EditorHeader() {
-  const { docsState, docsHandler } = useDocumentForm();
-  const { documentForm } = docsState;
-  const { handleEditorChange, handleTagChange } = docsHandler;
+  const { proceedingState, proceedingHandler } = useProceedingForm();
+  const { proceedingForm } = proceedingState;
+  const { handleEditorChange, handleTagChange } = proceedingHandler;
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function EditorHeader() {
         </p>
         <SelectWrapper>
           <Select
-            value={documentForm.tag}
+            value={proceedingForm.tag}
             onChange={handleTagChange}
             options={tag}
           />
@@ -29,7 +29,7 @@ export default function EditorHeader() {
       >
         <MDEditor
           height={400}
-          value={documentForm.content}
+          value={proceedingForm.content}
           onChange={handleEditorChange}
           preview="edit"
           hideToolbar={false}

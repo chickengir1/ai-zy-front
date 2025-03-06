@@ -1,12 +1,15 @@
-import { useProjects } from "@/hooks/api/projects/useProjects";
-import { useProjectStore } from "@/store/projectStore";
 import { useEffect } from "react";
+import { useProjects } from "@/hooks/api/projects/useProjects";
+import { useProjectCollectionStore } from "@/store/proceedings/projectCollectionStore";
+import { usePageStore } from "@/store/utilityStore/pageStore";
 
 export function useProjectsData() {
-  const { data: projects } = useProjects();
+  const { page } = usePageStore();
+
+  const { data: projects } = useProjects({ page: String(page) });
   const projectItems = projects?.content || [];
 
-  const { setProjects } = useProjectStore();
+  const { setProjects } = useProjectCollectionStore();
 
   useEffect(() => {
     if (projects) {

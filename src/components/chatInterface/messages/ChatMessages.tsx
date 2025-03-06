@@ -1,24 +1,45 @@
-import {
-  useChatMessageActions,
-  useChatResponseActions,
-} from "@/store/chatStore";
-import { getModeColors } from "@/utils/helpers/messageUtils";
 import { useConversationFlow } from "@/hooks/api/chat/useConversationFlow";
+import { getModeColors } from "@/utils/chat/messageUtils";
 import { renderMessageItem } from "@/components/chatInterface/messages/RenderMessageItems";
+import {
+  useChatInteractionStore,
+  useChatResponseStore,
+} from "@/store/chat/chatSessionStore";
+import { AiDnaLoader } from "@/components/ui/loading/AiDnaLoader";
+import { useEffect, useRef } from "react";
 
-export default function ChatMessages({ isCommandMode }: Chat.ChatProps) {
-  const { messages } = useChatMessageActions();
-  const { chatResponses } = useChatResponseActions();
+interface ChatMessagesProps {
+  isCommandMode: boolean;
+  isLoading: boolean;
+}
 
-  const conversationFlow = useConversationFlow(messages, chatResponses);
+export default function ChatMessages({
+  isCommandMode,
+  isLoading,
+}: ChatMessagesProps) {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { messages } = useChatInteractionStore();
+  const { responses } = useChatResponseStore();
 
+  const conversationFlow = useConversationFlow(messages, responses);
   const colors = getModeColors(isCommandMode);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [conversationFlow]);
+
   return (
-    <div className={`h-96 overflow-y-auto p-4 ${colors.bg} ${colors.text}`}>
-      {conversationFlow.map((message, index) => (
-        <div key={`message-${index}`}>{renderMessageItem(message)}</div>
-      ))}
+    <div
+      className={`h-96 w-full overflow-y-auto p-4 scrollbar-hide ${colors.bg} ${colors.text}`}
+    >
+      {isLoading ? (
+        <AiDnaLoader />
+      ) : (
+        conversationFlow.map((message, index) => (
+          <div key={`message-${index}`}>{renderMessageItem(message)}</div>
+        ))
+      )}
+      <div ref={messagesEndRef} />
     </div>
   );
 }

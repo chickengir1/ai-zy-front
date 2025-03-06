@@ -1,7 +1,7 @@
-import { useResizeHandler } from "@/hooks/utility/useResizeHandler";
-import { MIN_WIDTH } from "@/utils/constants";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { useNavigation } from "@/hooks/utility/useNavigation";
+import { useResizeHandler } from "@/hooks/utility/media/useResizeHandler";
+import { useNavigation } from "@/hooks/utility/navigation/useNavigation";
+import { MIN_WIDTH } from "@/utils/common/constans";
 
 const Unsupported = () => {
   const { goBack } = useNavigation();

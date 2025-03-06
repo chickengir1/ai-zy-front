@@ -1,17 +1,14 @@
-import {
-  DocumentClassesStyles,
-  UnitClassesStyles,
-} from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-import { useDocumentForm } from "@/hooks/ui/proceedings/useDocumentForm";
-import { useToggle } from "@/hooks/utility/useToggle";
-import EditorModal from "@/components/chips/markdownEditor/EditorModal";
+import { useToggle } from "@/hooks/utility/toggle/useToggle";
+import { ProceedingStyles, UnitStyles } from "@/utils/styles/global";
 import EditorHeader from "@/components/chips/markdownEditor/EditorContent";
+import EditorModal from "@/components/chips/markdownEditor/EditorModal";
 import EditorTitle from "@/components/chips/markdownEditor/EditorTitle";
+import { useProceedingForm } from "@/hooks/business/proceedings/useProceedingForm";
 
 export default function MarkdownEditor() {
-  const { docsAction } = useDocumentForm();
-  const { handleSubmit } = docsAction;
+  const { proceedingAction } = useProceedingForm();
+  const { handleSubmit } = proceedingAction;
   const [isModalOpen, toggleModal] = useToggle(false);
 
   function handleCancelWriting() {
@@ -20,10 +17,10 @@ export default function MarkdownEditor() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={twMerge(DocumentClassesStyles.container)}>
+      <div className={twMerge(ProceedingStyles.container)}>
         <EditorTitle openModal={handleCancelWriting} />
         <EditorHeader />
-        <button type="submit" className={twMerge(UnitClassesStyles.button)}>
+        <button type="submit" className={twMerge(UnitStyles.button)}>
           제출하기
         </button>
       </div>

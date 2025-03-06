@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
+import { IoAdd } from "react-icons/io5";
 import { twMerge } from "tailwind-merge";
-import {
-  BaseClassesStyles,
-  SizeClassesStyles,
-} from "@/utils/styles/globalStyeld";
-import { IoPushOutline } from "react-icons/io5";
+import { CreationItemStyles } from "@/utils/styles/global";
 
 interface CreationPathProps {
   path: string;
@@ -12,26 +9,11 @@ interface CreationPathProps {
 
 export default function CreationPath({ path }: CreationPathProps) {
   return (
-    <Link
-      to={path}
-      className={twMerge(
-        BaseClassesStyles.linkButton,
-        SizeClassesStyles.linkButton
-      )}
-    >
-      <div
-        className={twMerge(
-          BaseClassesStyles.iconContainer,
-          SizeClassesStyles.iconContainer
-        )}
-      >
-        <IoPushOutline
-          className={twMerge(BaseClassesStyles.icon, SizeClassesStyles.icon)}
-        />
+    <Link to={path} className={twMerge(CreationItemStyles.link)}>
+      <div className={CreationItemStyles.iconContainer}>
+        <IoAdd className={CreationItemStyles.icon} />
       </div>
-      <span className={twMerge(BaseClassesStyles.text, SizeClassesStyles.text)}>
-        새 작업
-      </span>
+      <span className={CreationItemStyles.text}>새 작업</span>
     </Link>
   );
 }

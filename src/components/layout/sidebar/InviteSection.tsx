@@ -1,8 +1,8 @@
-import InvitedList from "./InvitedList";
-import { useValidation } from "@/hooks/utility/useValidation";
-import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
-import { useSidebarForm } from "@/hooks/ui/sidebar/useSidebarForm";
+import { useSidebarForm } from "@/hooks/business/sidebar/useSidebarForm";
+import { useValidation } from "@/hooks/utility/common/useValidation";
+import { SidebarStyles } from "@/utils/styles/global";
+import InvitedList from "./InvitedList";
 
 export default function InviteSection({ onClose }: Sidebar.SidebarProps) {
   const { formState, inviteHandlers } = useSidebarForm({
@@ -16,14 +16,14 @@ export default function InviteSection({ onClose }: Sidebar.SidebarProps) {
   return (
     <div>
       <div>
-        <p className={twMerge(SidebarClassesStyles.titleClasses)}>팀원 초대</p>
+        <p className={twMerge(SidebarStyles.titleClasses)}>팀원 초대</p>
         <div className="flex flex-col">
-          <div className={twMerge(SidebarClassesStyles.listClasses, "flex")}>
+          <div className={twMerge(SidebarStyles.listClasses, "flex")}>
             <input
               type="email"
               placeholder="프로젝트에 팀원을 초대하세요"
               className={twMerge(
-                SidebarClassesStyles.inputClasses,
+                SidebarStyles.inputClasses,
                 validation.email.styles.input
               )}
               value={inviteEmail}
@@ -34,7 +34,7 @@ export default function InviteSection({ onClose }: Sidebar.SidebarProps) {
               onClick={handleInvite}
               disabled={!validation.email.isValid}
               className={twMerge(
-                SidebarClassesStyles.buttonClasses,
+                SidebarStyles.buttonClasses,
                 validation.email.styles.button
               )}
             >
@@ -43,19 +43,17 @@ export default function InviteSection({ onClose }: Sidebar.SidebarProps) {
           </div>
           <div className="h-4">
             {validation.email.showError && (
-              <p className={twMerge(SidebarClassesStyles.errorClasses)}>
+              <p className={twMerge(SidebarStyles.errorClasses)}>
                 {validation.email.errorMessage}
               </p>
             )}
           </div>
         </div>
       </div>
-      <p className={twMerge(SidebarClassesStyles.titleClasses, "mt-2")}>
-        초대된 팀원
-      </p>
+      <p className={twMerge(SidebarStyles.titleClasses, "mt-2")}>초대된 팀원</p>
       <div
         className={twMerge(
-          SidebarClassesStyles.listClasses,
+          SidebarStyles.listClasses,
           "h-[150px] border-[#E4E4E7] bg-[#F9FAFB] p-2"
         )}
       >

@@ -1,7 +1,5 @@
-import { useAuthStore } from "@/store/AuthStore";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-
-// TODO: 로그아웃 처리 해야함
+import { useAuthStore } from "@/store/utilityStore/authorizationStore";
 
 export interface ApiError {
   code: string;

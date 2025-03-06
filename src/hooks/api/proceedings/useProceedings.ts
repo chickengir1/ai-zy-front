@@ -1,12 +1,12 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/api/queryKeys";
 import {
   createData,
   fetchData,
   fetchDetailData,
   softDeleteData,
   updateData,
-} from "@/hooks/api/useApihandler";
+} from "@/hooks/api/commonApiHandlers/useApihandler";
+import { QUERY_KEYS } from "@/api/queryKeys";
 
 export interface ProceedingsResponse {
   content: ProceedingItem[];
@@ -23,7 +23,6 @@ export interface ProceedingItem {
 
 interface Params {
   page?: string;
-  limit?: string;
 }
 
 interface CreateProceedingData {
@@ -53,7 +52,7 @@ export const useProceedings = (
 ) => {
   const url = `/api/projects/${projectId}/proceedings`;
 
-  const queryKey = QUERY_KEYS.projects.proceedings.base(projectId, params);
+  const queryKey = QUERY_KEYS.proceedings.base(projectId, params);
 
   const query = useSuspenseQuery<ProceedingsResponse>({
     queryKey,
@@ -69,10 +68,7 @@ export const useProceedingsDetail = (
 ) => {
   const url = `/api/projects/${projectId}/proceedings/${proceedingId}`;
 
-  const queryKey = QUERY_KEYS.projects.proceedings.detail(
-    projectId,
-    proceedingId
-  );
+  const queryKey = QUERY_KEYS.proceedings.detail(projectId, proceedingId);
 
   const query = useSuspenseQuery<ProceedingDetailResponse>({
     queryKey,

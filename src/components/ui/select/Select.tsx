@@ -1,6 +1,5 @@
-import { renderOptions } from "@/utils/helpers/sharedHelpers";
-import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
 import { twMerge } from "tailwind-merge";
+import { SidebarStyles } from "@/utils/styles/global";
 
 interface SelectProps {
   name?: string;
@@ -17,6 +16,13 @@ export default function Select({
   options,
   className,
 }: SelectProps) {
+  function renderOptions(items: string[]) {
+    return items.map((item) => (
+      <option key={item} value={item}>
+        {item}
+      </option>
+    ));
+  }
   return (
     <select
       name={name}
@@ -26,9 +32,9 @@ export default function Select({
         "w-full appearance-none px-4 py-2 pr-10 text-gray-700",
         "transition-all duration-200 ease-in-out",
         "hover:border-gray-400",
-        SidebarClassesStyles.inputClasses,
-        SidebarClassesStyles.listClasses,
-        SidebarClassesStyles.inputFocus,
+        SidebarStyles.inputClasses,
+        SidebarStyles.listClasses,
+        SidebarStyles.inputFocus,
         className
       )}
     >

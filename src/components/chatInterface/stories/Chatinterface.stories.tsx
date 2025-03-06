@@ -1,5 +1,7 @@
+import { queryClient } from "@/api/queryClient";
+import ChatInterface from "@/components/chatInterface/chatUi/ChatInterface";
 import type { Meta, StoryObj } from "@storybook/react";
-import ChatInterface from "@/components/chatInterface/ChatInterface";
+import { QueryClientProvider } from "@tanstack/react-query";
 
 const meta: Meta<typeof ChatInterface> = {
   title: "chatInterface/ChatInterface",
@@ -10,6 +12,15 @@ const meta: Meta<typeof ChatInterface> = {
       iframeHeight: 800,
     },
   },
+  decorators: [
+    (Story) => (
+      <div className="relative h-screen">
+        <QueryClientProvider client={queryClient}>
+          <Story />
+        </QueryClientProvider>
+      </div>
+    ),
+  ],
 };
 
 export default meta;

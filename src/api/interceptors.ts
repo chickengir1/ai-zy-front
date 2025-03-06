@@ -4,9 +4,9 @@ import {
   InternalAxiosRequestConfig,
   AxiosResponse,
 } from "axios";
+import { getFreshAccessToken } from "@/providers/auth/authConfig";
+import { useAuthStore } from "@/store/utilityStore/authorizationStore";
 import { determineErrorType, handleAuthIfNeeded } from "@/api/errorHandler";
-import { useAuthStore } from "@/store/AuthStore";
-import { getFreshAccessToken } from "@/utils/helpers/authConfig";
 
 export function setupInterceptors(instance: AxiosInstance) {
   instance.interceptors.request.use(

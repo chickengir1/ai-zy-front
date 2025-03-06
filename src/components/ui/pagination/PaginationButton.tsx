@@ -1,55 +1,50 @@
-import { useSearchParams } from "react-router-dom";
-import { usePageStore } from "@/store/pageStore";
-import { useEffect } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { usePaginationConfig } from "@/hooks/utility/navigation/usePaginationConfig";
+import { twMerge } from "tailwind-merge";
+import { PaginationStyles } from "@/utils/styles/global";
 
-export default function PaginationButton() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { page, limit, setPage } = usePageStore();
+interface PaginationButtonProps {
+  dataLength: number;
+}
 
-  useEffect(() => {
-    const pageParam = searchParams.get("page");
-    if (pageParam !== null && Number(pageParam) !== page) {
-      setPage(Number(pageParam));
-    }
-  }, [searchParams, page, setPage]);
-
-  function handlePageChange(newPage: number) {
-    return () => {
-      if (newPage >= 0) {
-        setPage(newPage);
-        setSearchParams({ page: newPage.toString(), limit: limit.toString() });
-      }
-    };
-  }
+export default function PaginationButton({
+  dataLength,
+}: PaginationButtonProps) {
+  const { state, handler } = usePaginationConfig(dataLength);
+  const { page, isNextDisabled, showIndicator } = state;
+  const { handlePageChange } = handler;
 
   return (
-    <div className="flex items-center justify-center gap-4 py-6">
+    <div className={PaginationStyles.container}>
       <button
         onClick={handlePageChange(page - 1)}
-        className={`${buttonStyles.base} ${buttonStyles.hover} ${buttonStyles.disabled}`}
+        className={twMerge(
+          PaginationStyles.button.base,
+          PaginationStyles.button.common,
+          PaginationStyles.button.hover,
+          PaginationStyles.button.active,
+          page <= 0 && PaginationStyles.button.disabled
+        )}
         disabled={page <= 0}
       >
-        <HiChevronLeft className="h-5 w-5" />
+        <HiChevronLeft className={PaginationStyles.icon.left} />
       </button>
-
-      <div className={buttonStyles.pageIndicatorStyles}>{page + 1}</div>
-
+      <div className={PaginationStyles.indicator}>
+        {showIndicator ? `Page ${page}` : "Page"}
+      </div>
       <button
         onClick={handlePageChange(page + 1)}
-        className={`${buttonStyles.base} ${buttonStyles.hover} ${buttonStyles.disabled}`}
+        className={twMerge(
+          PaginationStyles.button.base,
+          PaginationStyles.button.common,
+          PaginationStyles.button.hover,
+          PaginationStyles.button.active,
+          isNextDisabled && PaginationStyles.button.disabled
+        )}
+        disabled={isNextDisabled}
       >
-        <HiChevronRight className="h-5 w-5" />
+        <HiChevronRight className={PaginationStyles.icon.right} />
       </button>
     </div>
   );
 }
-
-const buttonStyles = {
-  base: "flex items-center justify-center gap-1 px-4 py-2 rounded-lg bg-indigo-600 text-white shadow-md transform transition-all duration-200",
-  hover: "hover:shadow-lg hover:from-blue-600 hover:to-indigo-700",
-  disabled:
-    "disabled:opacity-50 disabled:pointer-events-none disabled:from-gray-400 disabled:to-gray-500",
-  pageIndicatorStyles:
-    "flex items-center justify-center min-w-[3rem] h-10 rounded-full bg-gray-100 text-gray-800 font-semibold shadow-inner px-3",
-};

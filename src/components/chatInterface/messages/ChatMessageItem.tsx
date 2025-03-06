@@ -1,4 +1,4 @@
-import { getMessageStyle } from "@/utils/helpers/messageUtils";
+import { getMessageStyle } from "@/utils/chat/messageUtils";
 
 interface ChatMessageItemProps {
   message: Chat.Message;

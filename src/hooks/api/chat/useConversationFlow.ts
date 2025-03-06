@@ -1,58 +1,68 @@
-import { useMemo } from "react";
+interface BotResponse {
+  response: string;
+}
 
-function processResponseContent(content: string): string {
+interface ConversationFlowParams {
+  messages: Chat.Message[];
+  responses: BotResponse[];
+}
+
+interface JsonResponse {
+  response?: string;
+}
+
+function parseResponseContent(content: string): string {
+  const trimmed = content.trim();
+  if (!(trimmed.startsWith("{") && trimmed.endsWith("}"))) return content;
+
   try {
-    if (content.trim().startsWith("{") && content.trim().endsWith("}")) {
-      const parsed = JSON.parse(content);
-      return parsed.response || content;
-    }
-    return content;
+    const parsed = JSON.parse(trimmed) as JsonResponse;
+    return parsed.response || content;
   } catch (error) {
-    console.error("응답 내용 파싱 오류", error);
+    console.error("응답 파싱 오류", error);
     return content;
   }
 }
 
-function buildConversationFlow(
-  messages: Chat.Message[],
-  chatResponses: { response: string }[]
-): Chat.Message[] {
-  const pairedMessages = messages
-    .map((message, index) => {
-      const array = [message];
-      if (index < chatResponses.length) {
-        const botMessage: Chat.Message = {
-          type: "normal",
-          sender: "bot",
-          rawCommand: processResponseContent(chatResponses[index].response),
-        };
-        array.push(botMessage);
-      }
-      return array;
-    })
-    .flat();
-
-  const extraResponses = chatResponses
-    .slice(messages.length)
-    .map((response) => {
-      const botMessage: Chat.Message = {
-        type: "normal",
-        sender: "bot",
-        rawCommand: processResponseContent(response.response),
-      };
-      return botMessage;
-    });
-
-  return [...pairedMessages, ...extraResponses];
+function createBotMessage(response: string): Chat.Message {
+  return {
+    type: "normal",
+    sender: "bot",
+    rawCommand: parseResponseContent(response),
+  };
 }
 
-export function useConversationFlow(
-  messages: Chat.Message[],
-  chatResponses: { response: string }[]
-): Chat.Message[] {
-  const conversationFlow = useMemo(() => {
-    return buildConversationFlow(messages, chatResponses);
-  }, [messages, chatResponses]);
+// NOTE: 채팅 메세지 배열 생성 [user, bot, user, bot, ...]
+function pairMessages({ messages, responses }: ConversationFlowParams) {
+  return messages.flatMap((msg, idx) => {
+    const currentResponse = responses[idx];
+    if (!currentResponse) return [msg];
 
-  return conversationFlow;
+    const botMessageArray = [createBotMessage(currentResponse.response)];
+    return [msg, ...botMessageArray];
+  });
 }
+
+// NOTE: 페어가 없는 봇 메세지 처리 [user, bot, user, bot, bot, bot, ...]
+function processExtraResponses({
+  messages,
+  responses,
+}: ConversationFlowParams) {
+  const remainingResponses = responses.slice(messages.length);
+  const extraResponses = remainingResponses.map(({ response }) =>
+    createBotMessage(response)
+  );
+  return extraResponses;
+}
+
+export const useConversationFlow = (
+  messages: Chat.Message[],
+  chatResponses: BotResponse[]
+) => {
+  const buildConversationFlow = (params: ConversationFlowParams) => [
+    ...pairMessages(params),
+    ...processExtraResponses(params),
+  ];
+
+  return buildConversationFlow({ messages, responses: chatResponses });
+};

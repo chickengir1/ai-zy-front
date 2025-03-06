@@ -1,6 +1,10 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  createData,
+  fetchData,
+  softDeleteData,
+} from "@/hooks/api/commonApiHandlers/useApihandler";
 import { QUERY_KEYS } from "@/api/queryKeys";
-import { createData, fetchData } from "@/hooks/api/useApihandler";
 
 interface ProjectsResponse {
   content: Project[];
@@ -8,7 +12,6 @@ interface ProjectsResponse {
 
 interface Params {
   page?: string;
-  limit?: string;
 }
 
 interface Project {
@@ -45,6 +48,16 @@ export const useCreateProject = () => {
 
   const mutation = useMutation({
     mutationFn: (data: CreateProjectData) => createData(url, data),
+  });
+
+  return mutation;
+};
+
+export const useDeleteProject = (projectId: string) => {
+  const url = `/api/project/${projectId}`;
+
+  const mutation = useMutation({
+    mutationFn: () => softDeleteData(url),
   });
 
   return mutation;

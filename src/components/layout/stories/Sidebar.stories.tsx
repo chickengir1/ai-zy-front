@@ -1,7 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react";
-
-import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { useState } from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import Sidebar from "@/components/layout/sidebar/Sidebar";
+import { MemoryRouter } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/api/queryClient";
 
 const meta: Meta<typeof Sidebar> = {
   title: "Layout/Sidebar",
@@ -19,6 +21,15 @@ const meta: Meta<typeof Sidebar> = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <Story />
+        </MemoryRouter>
+      </QueryClientProvider>
+    ),
+  ],
 };
 
 export default meta;

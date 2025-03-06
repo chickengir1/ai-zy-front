@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { tag } from "@/utils/constants";
+import { tag } from "@/utils/common/constans";
 
 const initialSidebarForm: Sidebar.SidebarFormProps = {
   title: "",

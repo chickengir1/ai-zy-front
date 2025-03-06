@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import pagesRouter from "vite-plugin-pages-router/plugin";
 
 // https://vite.dev/config/

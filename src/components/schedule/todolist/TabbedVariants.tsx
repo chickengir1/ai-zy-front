@@ -1,19 +1,15 @@
-import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
-import { TabbedFormInputProps } from "./TabbedFormInput";
 import { twMerge } from "tailwind-merge";
-import SelectWrapper from "@/components/ui/select/SelectWrapper";
+import { useTodolist } from "@/hooks/business/todolist/useTodolist";
+import { SidebarStyles } from "@/utils/styles/global";
+import { state } from "@/utils/todolist/todolistUtils";
 import Select from "@/components/ui/select/Select";
-import { useTodolist } from "@/hooks/ui/todolist/useTodolist";
+import SelectWrapper from "@/components/ui/select/SelectWrapper";
 
-interface TabbedVariantsProps extends TabbedFormInputProps {
-  activeTab: "title" | "tag" | "priority";
+interface TabbedVariantsProps {
+  activeTab: Todo.TodoTab;
 }
 
-export function TabbedVariants({
-  activeTab,
-  tags,
-  priorities,
-}: TabbedVariantsProps) {
+export function TabbedVariants({ activeTab }: TabbedVariantsProps) {
   const { form, handler } = useTodolist();
   const { handleChangeTodo } = handler;
   const { form: todoForm } = form;
@@ -28,29 +24,20 @@ export function TabbedVariants({
           value={todoForm.title}
           onChange={handleChangeTodo}
           className={twMerge(
-            SidebarClassesStyles.inputClasses,
-            SidebarClassesStyles.listClasses,
-            SidebarClassesStyles.inputFocus
+            SidebarStyles.inputClasses,
+            SidebarStyles.listClasses,
+            SidebarStyles.inputFocus
           )}
         />
       )}
-      {activeTab === "tag" && (
+
+      {activeTab === "state" && (
         <SelectWrapper>
           <Select
-            name="tag"
-            value={todoForm.tag}
+            name="state"
+            value={todoForm.state}
             onChange={handleChangeTodo}
-            options={tags}
-          />
-        </SelectWrapper>
-      )}
-      {activeTab === "priority" && (
-        <SelectWrapper>
-          <Select
-            name="priority"
-            value={todoForm.priority}
-            onChange={handleChangeTodo}
-            options={priorities}
+            options={state}
           />
         </SelectWrapper>
       )}

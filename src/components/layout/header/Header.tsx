@@ -1,62 +1,47 @@
-import { HEADER_ROUTES } from "@/utils/helpers/routeConfig";
-import { useMatch } from "react-router-dom";
-import { twMerge } from "tailwind-merge";
-import { HeaderClassesStyles } from "@/utils/styles/globalStyeld";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { useNavigation } from "@/hooks/utility/useNavigation";
+import { twMerge } from "tailwind-merge";
+import { HeaderStyles } from "@/utils/styles/global";
+import { useHeader } from "@/hooks/utility/common/useHeader";
 
 interface HeaderProps {
-  title: string;
-  className?: string;
+  title?: string;
 }
 
-function shouldDisplayHeader(): boolean {
-  return HEADER_ROUTES.some((route) => {
-    const match = useMatch(route.path);
-    return match && route.shouldShowHeader;
-  });
-}
+export default function Header({ title }: HeaderProps) {
+  const { header, handler } = useHeader();
+  const { shouldHeader, getRouteTitle, hideButton } = header;
+  const { handleNavigation } = handler;
 
-export default function Header({ title, className }: HeaderProps) {
-  const { goBack } = useNavigation();
-  const shouldHideButton =
-    location.pathname === "/" || location.pathname === "/projects";
-
-  function handleNavigation() {
-    if (!shouldHideButton) {
-      goBack();
-    }
-  }
+  const routeTitle = getRouteTitle();
+  const displayTitle = title || routeTitle;
 
   return (
     <header
       className={twMerge(
-        "flex w-full items-center justify-between bg-white px-4 py-4 shadow-md",
-        HeaderClassesStyles.headerResponsive,
-        className
+        "justify-between bg-white p-4 shadow-md",
+        HeaderStyles.headerResponsive
       )}
     >
-      <div className="flex w-full items-center justify-between">
-        {shouldDisplayHeader() && (
+      <div className="flex w-full items-center justify-between space-x-2">
+        {shouldHeader() && (
           <h1
             className={twMerge(
-              HeaderClassesStyles.headerClasses,
+              HeaderStyles.headerClasses,
               "font-bold text-indigo-700"
             )}
           >
-            {title}
+            {displayTitle}
           </h1>
         )}
-        {!shouldHideButton && (
+        {!hideButton && (
           <button
             onClick={handleNavigation}
-            className={HeaderClassesStyles.button}
+            className={twMerge(HeaderStyles.button)}
           >
-            <IoArrowBackOutline
-              size={20}
-              className={HeaderClassesStyles.icon}
-            />
-            <span className={HeaderClassesStyles.text}>뒤로가기</span>
+            <IoArrowBackOutline size={20} className={HeaderStyles.icon} />
+            <span className={twMerge(HeaderStyles.text, "hidden sm:inline")}>
+              뒤로가기
+            </span>
           </button>
         )}
       </div>

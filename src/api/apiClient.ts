@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { setupInterceptors } from "@/api/interceptors";
 import { ApiError } from "@/api/errorHandler";
+import { setupInterceptors } from "@/api/interceptors";
 
 export interface RequestConfig<T = unknown> extends AxiosRequestConfig {
   url: string;
@@ -26,6 +26,14 @@ export const axiosInstance: AxiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
+  },
+});
+
+export const openaiClient = axios.create({
+  baseURL: "https://api.openai.com/v1",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
   },
 });
 

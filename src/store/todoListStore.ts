@@ -1,13 +1,12 @@
 import { create } from "zustand";
-import { tag, priorities } from "@/utils/constants";
 
 const initialTodoForm: Todo.TodoForm = {
   title: "",
-  tag: tag[0],
-  priority: priorities[0],
+  assigneeName: "",
+  state: "",
 };
 
-export const useFormStore = create<Todo.TodoFormState>((set) => ({
+export const useTodoFormStore = create<Todo.TodoFormState>((set) => ({
   form: initialTodoForm,
   actions: {
     setForm: (form) => set((state) => ({ form: { ...state.form, ...form } })),
@@ -15,18 +14,18 @@ export const useFormStore = create<Todo.TodoFormState>((set) => ({
   },
 }));
 
-export const useTodoStore = create<Todo.TodoState>((set) => ({
+export const useTodoStore = create<Todo.TodoStoreState>((set) => ({
   todos: [],
   actions: {
     addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
-    deleteTodo: (id) =>
+    removeTodo: (todoId) =>
       set((state) => ({
-        todos: state.todos.filter((todo) => todo.id !== id),
+        todos: state.todos.filter((todo) => todo.id !== todoId),
       })),
   },
 }));
 
-export const useTabStore = create<Todo.TabState>((set) => ({
+export const useTodoTabStore = create<Todo.TabStoreState>((set) => ({
   activeTab: "title",
   actions: {
     setTab: (tab) => set({ activeTab: tab }),
@@ -34,9 +33,9 @@ export const useTabStore = create<Todo.TabState>((set) => ({
 }));
 
 export const useTodoListActions = () => {
-  const { addTodo, deleteTodo } = useTodoStore().actions;
-  const { setForm, resetForm } = useFormStore().actions;
-  const { setTab } = useTabStore().actions;
+  const { addTodo, removeTodo } = useTodoStore().actions;
+  const { setForm, resetForm } = useTodoFormStore().actions;
+  const { setTab } = useTodoTabStore().actions;
 
-  return { addTodo, deleteTodo, setForm, resetForm, setTab };
+  return { addTodo, removeTodo, setForm, resetForm, setTab };
 };

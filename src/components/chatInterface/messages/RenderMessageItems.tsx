@@ -18,7 +18,7 @@ export function renderMessageItem(message: Chat.Message) {
 
   return (
     <div className={`mb-2 ${isUser ? "text-right" : "text-left"}`}>
-      <div className="inline-block max-w-[60%] whitespace-pre-wrap text-start">
+      <div className="inline-block max-w-[60%] whitespace-pre-wrap break-words break-all text-start">
         {messageContent}
       </div>
     </div>

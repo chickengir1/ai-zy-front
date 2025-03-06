@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
-import ErrorFallback from "@/components/errorBoundary/ErrorFallback";
+import { Meta, StoryObj } from "@storybook/react";
+import ErrorFallback from "@/components/errorBoundary/errorComponent/ErrorFallback";
 
 const meta: Meta<typeof ErrorFallback> = {
   title: "ErrorBoundary/ErrorFallback",

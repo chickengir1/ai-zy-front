@@ -1,34 +1,56 @@
 declare namespace Todo {
-  export interface TodoForm {
+  export interface TodoItem {
+    id: string;
     title: string;
-    tag: string;
-    priority: string;
+    assigneeName: string;
+    state: string;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string;
   }
 
-  export interface Todo extends TodoForm {
-    id: number;
+  export interface TodoForm {
+    title: string;
+    assigneeName: string;
+    state: string;
+  }
+
+  export type TodoTab = "title" | "state";
+
+  export interface TodoActions {
+    addTodo: (todo: TodoItem) => void;
+    deleteTodo: (id: string) => void;
+    setForm: (form: Partial<TodoForm>) => void;
+    resetForm: () => void;
+    setTab: (tab: TodoTab) => void;
+  }
+
+  export interface TodoSummary {
+    uniqueAssigneeNames: string[];
+    uniqueStates: string[];
+    assigneeNameCounts: number[];
   }
 
   export interface TodoFormState {
-    form: TodoForm;
+    form: Todo.TodoForm;
     actions: {
-      setForm: (form: Partial<TodoForm>) => void;
+      setForm: (form: Partial<Todo.TodoForm>) => void;
       resetForm: () => void;
     };
   }
 
-  export interface TodoState {
-    todos: Todo[];
+  export interface TodoStoreState {
+    todos: Todo.TodoItem[];
     actions: {
-      addTodo: (todo: Todo) => void;
-      deleteTodo: (id: number) => void;
+      addTodo: (todo: Todo.TodoItem) => void;
+      removeTodo: (todoId: string) => void;
     };
   }
 
-  export interface TabState {
-    activeTab: "title" | "tag" | "priority";
+  export interface TabStoreState {
+    activeTab: Todo.TodoTab;
     actions: {
-      setTab: (tab: "title" | "tag" | "priority") => void;
+      setTab: (tab: Todo.TodoTab) => void;
     };
   }
 }

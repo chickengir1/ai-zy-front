@@ -1,16 +1,16 @@
-import { SidebarClassesStyles } from "@/utils/styles/globalStyeld";
-import { useDocumentForm } from "@/hooks/ui/proceedings/useDocumentForm";
 import { MdCancel } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
+import { SidebarStyles } from "@/utils/styles/global";
+import { useProceedingForm } from "@/hooks/business/proceedings/useProceedingForm";
 
 interface EditorTitleProps {
   openModal: () => void;
 }
 
 export default function EditorTitle({ openModal }: EditorTitleProps) {
-  const { docsState, docsHandler } = useDocumentForm();
-  const { documentForm } = docsState;
-  const { handleValueChange } = docsHandler;
+  const { proceedingState, proceedingHandler } = useProceedingForm();
+  const { proceedingForm } = proceedingState;
+  const { handleValueChange } = proceedingHandler;
 
   return (
     <div>
@@ -23,13 +23,14 @@ export default function EditorTitle({ openModal }: EditorTitleProps) {
       <input
         autoFocus
         type="text"
+        maxLength={20}
         placeholder="회의록 제목 작성"
         className={twMerge(
-          SidebarClassesStyles.inputClasses,
-          SidebarClassesStyles.inputFocus,
-          SidebarClassesStyles.listClasses
+          SidebarStyles.inputClasses,
+          SidebarStyles.inputFocus,
+          SidebarStyles.listClasses
         )}
-        value={documentForm.title}
+        value={proceedingForm.title}
         onChange={handleValueChange("title")}
       />
     </div>

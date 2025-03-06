@@ -1,9 +1,9 @@
 import { MemoryRouter } from "react-router-dom";
-import CreationItem from "@/components/chips/creationItem/CreationItem";
 import { Meta, StoryObj } from "@storybook/react";
+import CreationItem from "@/components/chips/creationItem/CreationItem";
 
 const meta: Meta<typeof CreationItem> = {
-  title: "chips/CreationItem",
+  title: "creation/CreationItem",
   component: CreationItem,
   args: {
     path: "/",
@@ -26,8 +26,6 @@ export const Default: Story = {
   },
 };
 
-export const NoPath: Story = {
-  args: {},
-};
+export const NoPath: Story = {};
 
 export default meta;

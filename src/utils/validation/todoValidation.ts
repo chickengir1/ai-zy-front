@@ -1,6 +1,12 @@
+import type { Todolist } from "@/hooks/api/todolist/useTodolist";
+
 export function handleValidateTodoForm(
-  todos: Todo.Todo[],
-  form: Todo.TodoForm,
+  todos: Todolist[],
+  form: {
+    title: string;
+    assigneeName: string;
+    state: string;
+  },
   showError: (message: string) => void
 ) {
   const isEmpty = !form.title.trim();

@@ -35,3 +35,25 @@ declare namespace Invite {
     };
   }
 }
+
+declare namespace Validation {
+  export interface FieldStyles {
+    button: string;
+    input?: string;
+  }
+
+  export interface Options {
+    validator: (value: string) => boolean;
+    errorMessage: string;
+    validStyles: FieldStyles;
+    invalidStyles: FieldStyles;
+  }
+
+  export interface Field {
+    isValid: boolean;
+    hasInput: boolean;
+    showError: boolean;
+    errorMessage: string;
+    styles: FieldStyles;
+  }
+}
