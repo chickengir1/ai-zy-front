@@ -17,8 +17,6 @@
 > **개발팀:** 엘리스트랙 포트폴리오 1기 2차 프로젝트 2팀
 > 
 > 
-> **Github:** https://github.com/chickengir1/ai-zy-front
-> 
 > **Demo:** https://kdt-pt-1-pj-2-team02.elicecoding.com/
 > 
 > **팀 멤버:**
