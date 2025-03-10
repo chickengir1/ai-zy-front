@@ -106,16 +106,45 @@
 
 ### 프론트엔드 시퀀스 다이어그램
 
-![image.png](attachment:fd92859a-9799-41fd-a8f3-ddf9331b9459:image.png)
+```mermaid
+sequenceDiagram
+    participant User as 사용자
+    participant UI as UI 레이어
+    participant Logic as 로직 레이어(훅/유틸)
+    participant State as 상태 관리(스토어)
+    participant API as API 레이어
 
----
+    User->>UI: 1. 애플리케이션 접속
+    UI->>UI: 2. 정적 컴포넌트 렌더링
 
-### 프로젝트 데모
+    rect rgb(240, 240, 240)
+    
+        Note over UI,API: 데이터 흐름
+        UI->>Logic: 3. 이벤트 처리
+        
+        rect rgb(173, 216, 230)
 
-[https://drive.google.com/file/d/1lcfUSVM9S8o7ATrxiPWpXnj6fCbVsPxM/view?resourcekey](https://drive.google.com/file/d/1lcfUSVM9S8o7ATrxiPWpXnj6fCbVsPxM/view?resourcekey)
+        loop 데이터 검증 및 변환
+            Logic->>Logic: 4. 유틸리티 함수 및 훅 실행
+            Logic->>State: 5. 상태 갱신
+        end
 
-![image.png](attachment:76bc4748-fbd8-4077-a0c7-84729c6b47fa:image.png)
+        end
+        Logic->>API: 6. API 요청 전달
+        API->>API: 7. 인터셉터 처리
+        API->>Server: 8. 백엔드 호출
+        Server-->>API: 9. 응답 수신
+        
+        rect rgb(200, 230, 200)
 
-![image.png](attachment:17ac5a68-c560-4e9f-86de-b3dfda66c630:image.png)
+        loop 상태 관리
+            API-->>Logic: 10. 데이터 전달
+            Logic->>State: 11. 스토어 업데이트
+            State-->>Logic: 12-1. 새로운 상태 반영
+         end 
+         end
+            Logic-->>UI: 12-2. 업데이트된 데이터 전달
+    end
 
-![image.png](attachment:bd884f0c-fd03-4011-b5fd-83f57fa34aed:image.png)
+    UI-->>User: 13. 최종 화면 표시
+```
