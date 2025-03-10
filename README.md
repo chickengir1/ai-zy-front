@@ -30,6 +30,52 @@
 
 ---
 
+### 프론트엔드 시퀀스 다이어그램
+
+```mermaid
+sequenceDiagram
+    participant User as 사용자
+    participant UI as UI 레이어
+    participant Logic as 로직 레이어(훅/유틸)
+    participant State as 상태 관리(스토어)
+    participant API as API 레이어
+
+    User->>UI: 1. 애플리케이션 접속
+    UI->>UI: 2. 정적 컴포넌트 렌더링
+
+    rect rgb(240, 240, 240)
+    
+        Note over UI,API: 데이터 흐름
+        UI->>Logic: 3. 이벤트 처리
+        
+        rect rgb(173, 216, 230)
+
+        loop 데이터 검증 및 변환
+            Logic->>Logic: 4. 유틸리티 함수 및 훅 실행
+            Logic->>State: 5. 상태 갱신
+        end
+
+        end
+        Logic->>API: 6. API 요청 전달
+        API->>API: 7. 인터셉터 처리
+        API->>Server: 8. 백엔드 호출
+        Server-->>API: 9. 응답 수신
+        
+        rect rgb(200, 230, 200)
+
+        loop 상태 관리
+            API-->>Logic: 10. 데이터 전달
+            Logic->>State: 11. 스토어 업데이트
+            State-->>Logic: 12-1. 새로운 상태 반영
+         end 
+         end
+            Logic-->>UI: 12-2. 업데이트된 데이터 전달
+    end
+
+    UI-->>User: 13. 최종 화면 표시
+```
+---
+
 ### 핵심 기능
 
 ### 회의 관리
@@ -101,50 +147,3 @@
 
 - **일정 등록, 수정, 알림 기능** 제공
 - 팀원 간 **일정 공유 및 동기화**로 효율적인 시간 관리
-
----
-
-### 프론트엔드 시퀀스 다이어그램
-
-```mermaid
-sequenceDiagram
-    participant User as 사용자
-    participant UI as UI 레이어
-    participant Logic as 로직 레이어(훅/유틸)
-    participant State as 상태 관리(스토어)
-    participant API as API 레이어
-
-    User->>UI: 1. 애플리케이션 접속
-    UI->>UI: 2. 정적 컴포넌트 렌더링
-
-    rect rgb(240, 240, 240)
-    
-        Note over UI,API: 데이터 흐름
-        UI->>Logic: 3. 이벤트 처리
-        
-        rect rgb(173, 216, 230)
-
-        loop 데이터 검증 및 변환
-            Logic->>Logic: 4. 유틸리티 함수 및 훅 실행
-            Logic->>State: 5. 상태 갱신
-        end
-
-        end
-        Logic->>API: 6. API 요청 전달
-        API->>API: 7. 인터셉터 처리
-        API->>Server: 8. 백엔드 호출
-        Server-->>API: 9. 응답 수신
-        
-        rect rgb(200, 230, 200)
-
-        loop 상태 관리
-            API-->>Logic: 10. 데이터 전달
-            Logic->>State: 11. 스토어 업데이트
-            State-->>Logic: 12-1. 새로운 상태 반영
-         end 
-         end
-            Logic-->>UI: 12-2. 업데이트된 데이터 전달
-    end
-
-    UI-->>User: 13. 최종 화면 표시
-```
